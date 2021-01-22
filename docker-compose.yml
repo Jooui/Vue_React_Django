@@ -2,19 +2,16 @@ version: '3.3'
 
 services:
   web:
-    build: ./backend/django/
-    container_name: django_container
-    # command: bash -c "export API_AUTHENTICATION="False" && python3 manage.py makemigrations && python3 manage.py migrate && gunicorn usersRestAPI.wsgi -b 0.0.0.0:8000 && python3 manage.py collectstatic --noinput"
-    depends_on:
-      - postgres
+    build: ./backend/django3/
+    container_name: django_container2
     volumes:
-      - ./backend/django/src:/src
+      - ./backend/django3:/app
     ports:
       - "8000:8000"
-    command: "python3 init.py"
+    command: "python3 manage.py runserver 0.0.0.0:8000"
     
-  postgres:
-    image: postgres:latest
-    container_name: postgres_container 
-    environment:
-      POSTGRES_HOST_AUTH_METHOD: trust
+  # postgres:
+  #   image: postgres:latest
+  #   container_name: postgres_container 
+  #   environment:
+  #     POSTGRES_HOST_AUTH_METHOD: trust

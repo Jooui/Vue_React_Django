@@ -1,0 +1,19 @@
+version: '3.3'
+
+services:
+  web:
+    build: ./backend/django/
+    container_name: django_container
+    depends_on:
+      - postgres
+    volumes:
+      - ./backend/django:/app
+    ports:
+      - "8000:8000"
+    command: "python3 init.py"
+    
+  postgres:
+    image: postgres:latest
+    container_name: postgres_container 
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
