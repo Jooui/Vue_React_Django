@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'app.modules.articles',
+    'app.modules.fitness.category',
+    'app.modules.fitness.exercice',
+    # 'app.modules.training',
     'app.modules.authentication',
     'app.modules.core',
     'app.modules.profiles',

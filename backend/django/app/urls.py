@@ -19,6 +19,8 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
+    url(r'^api/', include('app.modules.fitness.category.urls', namespace='category')),
+    url(r'^api/', include('app.modules.fitness.exercice.urls', namespace='exercice')),
     url(r'^api/', include('app.modules.articles.urls', namespace='articles')),
     url(r'^api/', include('app.modules.authentication.urls', namespace='authentication')),
     url(r'^api/', include('app.modules.profiles.urls', namespace='profiles')),

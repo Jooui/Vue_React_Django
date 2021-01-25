@@ -9,5 +9,6 @@ class Employee(models.Model):
 class Coche(models.Model):
     modelo = models.CharField(max_length=60)
     marca = models.CharField(max_length=60)
+    propietario = models.ForeignKey(Employee, on_delete=models.CASCADE, blank=True, null=False, default=1, related_name='cars')
     def __str__(self):
-        return self.name
+        return self.modelo+" - "+self.marca

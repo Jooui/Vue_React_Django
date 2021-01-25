@@ -2,37 +2,43 @@ version: '3'
 
 services:
   django:
-    build: ./backend/django3/
-    container_name: django_container2
+    build: ./backend/django/
+    container_name: django_container
     volumes:
-      - ./backend/django3:/app
+      - ./backend/django:/app
     ports:
       - "8000:8000"
+    depends_on:
+    - postgres
     networks:
     - app_network
     command: "python3 manage.py runserver 0.0.0.0:8000"
-    
 
-  vue:
-    container_name: vue_container
-    build: ./frontend/vue
-    working_dir: /app
-    volumes:
-    - ./frontend/vue:/app
-    ports:
-    - "8080:8080"
+
+  # vue:
+  #   container_name: vue_container
+  #   build: ./frontend/vue
+  #   working_dir: /app
+  #   volumes:
+  #   - ./frontend/vue:/app
+  #   ports:
+  #   - "8080:8080"
+  #   networks:
+  #   - app_network
+  #   restart: on-failure
+  #   depends_on:
+  #   - django
+  #   working_dir: /app
+  #   command: bash -c "npm install && npm run serve"
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres_container 
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
     networks:
     - app_network
-    restart: on-failure
-    depends_on:
-    - django
-    working_dir: /app
-    command: bash -c "npm install && npm run serve"
 
 networks:
     app_network:
-  # postgres:
-  #   image: postgres:latest
-  #   container_name: postgres_container 
-  #   environment:
-  #     POSTGRES_HOST_AUTH_METHOD: trust
+

@@ -1,0 +1,34 @@
+from django.db import models
+from app.modules.fitness.category.models import Category
+
+# from django.template.defaultfilters import slugify
+# from random import randint
+
+
+
+class Exercice(models.Model):
+    slug = models.SlugField(unique=True, null = True, blank = True)
+    name = models.CharField(max_length=60)
+    description = models.TextField()
+    image = models.CharField(max_length=60, null = True)
+
+    author = models.ForeignKey(
+        'profiles.Profile', on_delete=models.CASCADE, related_name='exercices'
+    )
+
+    # categories = models.ManyToManyField(Category, through='ExerciceCategory', on_delete=models.CASCADE, related_name='categories')
+    # categories = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='categories')
+
+    verified = models.BooleanField(default=False)
+ 
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)+"-"+str(randint(1000,9999))
+        super(Exercice, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
+
+# class ExerciceCategory(models.Model):
+#     category = models.ForeignKey(Category)
+#     exercice = models.ForeignKey(Exercice)
