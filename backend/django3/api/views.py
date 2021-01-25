@@ -18,7 +18,6 @@ class EmployeeViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.Cre
         self.lookup_field = 'pk' if isinstance(request.parser_context.get('kwargs').get('pk', 0), int) else 'name'
         return super(EmployeeViewSet, self).retrieve(request, *args, **kwargs)
 
-    
 
 
 

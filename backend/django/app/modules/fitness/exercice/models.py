@@ -1,10 +1,8 @@
 from django.db import models
 from app.modules.fitness.category.models import Category
 
-# from django.template.defaultfilters import slugify
-# from random import randint
-
-
+from django.template.defaultfilters import slugify
+from random import randint
 
 class Exercice(models.Model):
     slug = models.SlugField(unique=True, null = True, blank = True)
@@ -12,12 +10,13 @@ class Exercice(models.Model):
     description = models.TextField()
     image = models.CharField(max_length=60, null = True)
 
-    author = models.ForeignKey(
-        'profiles.Profile', on_delete=models.CASCADE, related_name='exercices'
-    )
+    author = models.ForeignKey('profiles.Profile', on_delete=models.CASCADE, related_name='exers')
+    # categories = models.ManyToManyField(Category, related_name='categoriess') #FUNCIONAVA MIGRATE
 
     # categories = models.ManyToManyField(Category, through='ExerciceCategory', on_delete=models.CASCADE, related_name='categories')
     # categories = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='categories')
+
+    # categories = models.ForeignKey(Category, on_delete=models.DO_NOTHING, blank=True, null=False, default=1, related_name='categories') #FUNCIONA MIGRATE
 
     verified = models.BooleanField(default=False)
  
