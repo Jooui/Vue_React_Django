@@ -1,19 +1,6 @@
 version: '3'
 
 services:
-  django:
-    build: ./backend/django/
-    container_name: django_container
-    volumes:
-      - ./backend/django:/app
-    ports:
-      - "8000:8000"
-    depends_on:
-    - postgres
-    networks:
-    - app_network
-    command: "python3 manage.py runserver 0.0.0.0:8000"
-
 
   vue:
     container_name: vue_container
@@ -30,6 +17,19 @@ services:
     - django
     working_dir: /app
     command: bash -c "npm install && npm run serve"
+    
+  django:
+    build: ./backend/django/
+    container_name: django_container
+    volumes:
+      - ./backend/django:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+    - postgres
+    networks:
+    - app_network
+    command: "python3 manage.py runserver 0.0.0.0:8000"
 
   postgres:
     image: postgres:latest
