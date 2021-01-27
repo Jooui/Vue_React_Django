@@ -147,10 +147,16 @@ STATIC_URL = '/static/'
 #     'localhost:4000',
 # )
 
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:4100',
-    'http://localhost:8080',
-)
+# CORS_ORIGIN_WHITELIST = (
+#     'http://localhost:4100',
+#     'http://localhost:8080',
+#     'http://0.0.0.0:4100',
+#     'http://0.0.0.0:8080',
+# )
+
+CORS_ORIGIN_ALLOW_ALL = True 
+# CORS_ALLOW_CREDENTIALS = True
+
 
 # Tell Django about the custom `User` model we created. The string
 # `authentication.User` tells Django we are referring to the `User` model in
