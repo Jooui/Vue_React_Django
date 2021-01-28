@@ -1,14 +1,12 @@
 import { createApp } from 'vue'
+
 import store from "./store/index"
 import App from './App.vue'
 import router from './router'
 
+//get user info when load page (IMPORTANT next() instanciat sino === infinite loop :( )
+router.beforeEach((to, from, next) =>
+  Promise.all([store.dispatch("check_auth")]).then(next())
+);
+
 createApp(App).use(store).use(router).mount('#app')
-
-// const app = createApp({
-//     router,
-//     IonicVue,
-//     render: h => h(App)
-//   });
-
-// app.mount('#app');

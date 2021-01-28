@@ -9,7 +9,7 @@ const name = core.getInput("name");
 const commit = github.context.payload;
 
 try {
-  bot.sendMessage(chatId,`Hola ${name}, se ha realizado un commit con exito:\n\nAutor: ${commit.head_commit.author.username}\nEmail: ${commit.head_commit.author.email}\nMsg:${commit.head_commit.message}\nUrl:${commit.head_commit.url}`);
+  bot.sendMessage(chatId,`Hola ${name}, se ha realizado un commit con exito:\n\nAutor: ${commit.head_commit.author.username}\nEmail: ${commit.head_commit.author.email}\nMsg: ${commit.head_commit.message}\nUrl: ${commit.head_commit.url}`);
 
 } catch (error) {
   core.setFailed(error.message);

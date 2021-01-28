@@ -2,22 +2,10 @@ import { createWebHistory, createRouter } from "vue-router";
 import Home from "@/views/Home.vue";
 import Login from "@/views/Login.vue";
 import About from "@/views/About.vue";
-import User from "@/views/User.vue";
+import Profile from "@/views/Profile.vue";
 import NotFound from "@/views/NotFound.vue";
-import store from "@/store";
-// import AuthGuard from "../AuthGuard.js"
+import authGuard from "@/common/AuthGuard";
 
-const authGuard = (to, from, next) => {
-  console.log("entra auth guard");
-  console.log(store.getters.isAuthenticated);
-  if (store.getters.isAuthenticated) {
-    console.log("entra if");
-      next();
-  } else {
-    console.log("entra else");
-      next("/login")
-  }
-};
 
 const routes = [
   {
@@ -29,6 +17,7 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+    // beforeEnter: authGuard
   },
   {
     path: "/about",
@@ -37,10 +26,10 @@ const routes = [
     beforeEnter: authGuard
   },
   {
-    path: "/user/:name",
-    name: "User",
-    component: User,
-    props:true
+    path: "/profile",
+    name: "Profile",
+    component: Profile,
+    beforeEnter: authGuard
   },
   {
     path: "/:catchAll(.*)",

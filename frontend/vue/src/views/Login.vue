@@ -1,14 +1,16 @@
 <template>
   <div>
     <h1>Login</h1>
-    {{error}}
-    <form novalidate @submit.prevent="onSubmit()">
+    <ul v-if="errors" class="error-messages">
+      <li v-for="(value, key) in errors" :key="key">{{ key+": "+value }}</li>
+    </ul>
+    <form v-if="!isAuthenticated" novalidate @submit.prevent="onSubmit(email, password)">
       <div class="form-group">
         <label for="email">Email</label>
         <input
           type="email"
           name="email"
-          v-model="model.user.email"
+          v-model="email"
           class="form-control"
         />
       </div>
@@ -17,45 +19,56 @@
         <input
           type="password"
           name="password"
-          v-model="model.user.password"
+          v-model="password"
           class="form-control"
         />
       </div>
       <div class="form-group">
         <input type="submit" class="btn btn-success" value="Login" />&nbsp;
-        <router-link class="btn btn-info" to="/">Cancel</router-link>
+        <router-link class="btn btn-info" to="/">Cancel</router-link>&nbsp;
       </div>
     </form>
+    <div v-else>
+     
+      <input type="button" class="btn btn-success" @click="getCurrentUser" value="Current User" />
+    </div>
   </div>
 </template>
 
 <script>
 // import { reactive } from "vue";
 import store from "@/store";
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
+
+// if (store.getters.isAuthenticated) {
+//   this.$router.push({ name: "Profile" })
+// }
 
 export default {
-  setup() {
-    // console.log(email);
-    const model = { user: { email: "", password: "" } };
-
-    function onSubmit() {
-      // console.log(model.user.email);
-      store.dispatch("login", model).then(() =>{
-        console.log(store.error);
-      })
-     
+  data() {
+    //si esta logeado no puede acceder al login
+    if(store.getters.isAuthenticated){
+      this.$router.push({ name: "Profile" })
     }
-
     return {
-      model,
-      onSubmit,
+      email: null,
+      password: null,
     };
   },
+  methods: {
+    onSubmit(email,password) {
+      // const model = { user: { email: "", password: "" } };
+      store.dispatch("login", { user: { email, password } }).then(() => this.$router.push({ name: "Home" }));
+    },
+    logout(){
+      store.dispatch("logout").then(() => console.log("LOGOUT"))
+    },
+    getCurrentUser(){
+      console.log(this.currentUser.email);
+    },
+  },
   computed: {
-    ...mapState({
-      errors: state => state.error
-    })
+    ...mapGetters(["currentUser", "isAuthenticated","errors"]),
   }
 };
 </script>
