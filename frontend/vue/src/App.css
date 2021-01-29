@@ -1,0 +1,64 @@
+@font-face {
+  font-family: Poppins-Light;
+  src: url("./assets/fonts/poppins/Poppins-Light.ttf");
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  src: url("./assets/fonts/poppins/Poppins-Medium.ttf");
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src: url("./assets/fonts/poppins/Poppins-Bold.ttf");
+}
+
+@font-face {
+  font-family: Poppins-SemiBold;
+  src: url("./assets/fonts/poppins/Poppins-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: Poppins-ExtraBold;
+  src: url("./assets/fonts/poppins/Poppins-ExtraBold.ttf");
+}
+
+:root {
+  --header-height: 80px;
+}
+
+.info-msg,
+.success-msg,
+.warning-msg,
+.error-msg {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 3px 3px 3px 3px;
+  margin-top: 5px;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+.error-msg::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f00d";
+  margin-right: 10px;
+}
+
+.info-msg {
+  color: #059;
+  background-color: #bef;
+}
+.success-msg {
+  color: #270;
+  background-color: #dff2bf;
+}
+.warning-msg {
+  color: #9f6000;
+  background-color: #feefb3;
+}
+.error-msg {
+  color: #d8000c;
+  background-color: #ffbaba;
+}

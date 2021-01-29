@@ -1,0 +1,54 @@
+@import "../../App.css";
+
+@font-face {
+  font-family: Poppins-Bold;
+  src: url("../../assets/fonts/poppins/Poppins-Bold.ttf");
+}
+
+.mainHeader {
+  box-sizing: border-box;
+  width: 100%;
+  background-color: white;
+  height: var(--header-height);
+  border-bottom: 1px solid rgb(221, 220, 220);
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 100px;
+  box-shadow: 0px 0.5px 2.5px 0px rgba(0, 0, 0, 0.438);
+}
+
+.mainHeader_left {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainHeader_center {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mainHeader_right {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainHeader_option {
+  height: 100%;
+  margin: 0px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainHeader_option--link {
+  color: #1b1b1b;
+  text-decoration: none;
+  font-family: "PoppinsBold";
+  letter-spacing: 1.2px;
+}

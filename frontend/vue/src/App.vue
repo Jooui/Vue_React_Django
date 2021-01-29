@@ -1,23 +1,32 @@
 <template>
   <div>
-    <Header/>
-    <router-view/>
+    <Header />
+    <router-view />
   </div>
-
 </template>
 <script>
 import Header from "@/components/layout/header";
+import "./App.css";
+// import Headersax from "@/components/layout/headersax";
+
 export default {
-  
-  name: 'App',
+  name: "App",
   components: {
-    Header
-  }
-}
+    Header,
+  },
+};
 </script>
 
 <style>
-body{
+/* @import './App.css'; */
+
+@font-face {
+  font-family: "PoppinsBold";
+  src: local("PoppinsBold"),
+    url(./assets/fonts/poppins/Poppins-Bold.ttf) format("truetype");
+}
+
+body {
   margin: 0;
   padding: 0;
 }
@@ -32,8 +41,9 @@ body{
   background-color: #333;
 }
 
-.nav a{
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+.nav a {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   display: block;
   color: white;
   text-align: center;
