@@ -10,15 +10,15 @@ from .models import Employee
 class EmployeeViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin):
     queryset = Employee.objects.all().order_by('name')
     serializer_class = EmployeeSerializer
-    # lookup_fields = ('pk', 'name')
 
-    # lookup_field = 'name'
-    
     def retrieve(self,request, *args, **kwargs):
         self.lookup_field = 'pk' if isinstance(request.parser_context.get('kwargs').get('pk', 0), int) else 'name'
         return super(EmployeeViewSet, self).retrieve(request, *args, **kwargs)
 
+    # lookup_fields = ('pk', 'name')
 
+    # lookup_field = 'name'
+    
 
 
 # Permiteix tots els metodos (Create List Retrieve Detele Update) per ModelViewSet

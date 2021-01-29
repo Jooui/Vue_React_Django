@@ -1,6 +1,7 @@
 <template>
   <div class="login_page_content">
-    <div class="login_page_background"></div>
+    <!--<div><h1>Fitness<span>App</span></h1></div>-->
+    <div class="login_page_background" v-bind:style="bgImage"></div>
     <div id="login" class="login">
       <div class="form">
         <h2>Login</h2>
@@ -10,12 +11,11 @@
           </span>
         </div>
         <form
-          v-if="!isAuthenticated"
           novalidate
           @submit.prevent="onSubmit(email, password)"
         >
           <div class="form-field">
-            <label for="login-mail"><i class="fa fa-user"></i></label>
+            <label for="login-mail"><i class="fas fa-envelope"></i></label>
             <input
               id="login-mail"
               type="text"
@@ -36,7 +36,7 @@
               type="password"
               name="password"
               placeholder="Password"
-              pattern=".{6,}"
+              pattern=".{8,}"
               required
               v-model="password"
             />
@@ -50,6 +50,7 @@
             </div>
             <p class="button-text">SIGN IN</p>
           </button>
+          <router-link :to="{ name: 'Register' }">Create account</router-link>
         </form>
       </div>
 
@@ -111,14 +112,24 @@ export default {
   },
   computed: {
     ...mapGetters(["currentUser", "isAuthenticated", "errors"]),
+    bgImage() {
+      return {
+        backgroundImage: `url${require('../assets/gym_wallpaper.jpg')}`
+      };
+  }
   },
 };
 </script>
 
 <style>
+.navbar{
+  display:none;
+}
+
 .error-messages {
   display: flex;
   flex-direction: column;
+  margin-top: -18px;
 }
 /* .login_page_content::before {
   content: "";
@@ -134,7 +145,7 @@ export default {
 } */
 .login_page_content {
   /* width: 100vh; */
-  height: calc(100vh - 80px);
+  height: 100vh;
   width: 100;
   /* height: 100%; */
   font-family: "Poppins-Bold", sans-serif;

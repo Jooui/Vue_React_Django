@@ -7,14 +7,13 @@
           <span></span>
           <span></span>
         </button>
-        <a href="#">
-          <h4>Fitness<span>App</span></h4>
-        </a>
+        <router-link :to="{ name: 'Home' }" class="mainHeader_option--link"><h4>Fitness<span>App</span></h4></router-link>
+        
       </div>
 
       <div class="navbar-menu" id="open-navbar1">
         <ul class="navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">Home</a></li>
           <li class="navbar-dropdown">
             <div href="#" class="dropdown-toggler dropdown-title" data-dropdown="my-dropdown-id">
               Categories <i class="fa fa-angle-down"></i>
@@ -42,7 +41,10 @@
             </ul>
           </li>
           <li><a href="#">About</a></li>
-          <li><a href="#">Sign in</a></li>
+          <li><a href="#">
+            <router-link v-if="!isAuthenticated" :to="{ name: 'Login' }">Login</router-link>
+            <router-link v-if="isAuthenticated" :to="{ name: 'Profile' }">Profile</router-link>
+          </a></li>
         </ul>
       </div>
     </div>
@@ -284,6 +286,7 @@ a {
         > a,.dropdown-title {
           color: $text-dark;
           text-decoration: none;
+          cursor: pointer;
           display: inline-block;
           padding: 0.5rem 1rem;
           &:hover {
@@ -322,6 +325,7 @@ a {
           li {
             a,.dropdown-title {
               color: $text-dark;
+              cursor: pointer;
               padding: 0.25rem 1rem;
               display: block;
             }
