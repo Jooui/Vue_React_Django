@@ -41,7 +41,6 @@ const actions = {
     // location.reload();
   },
   check_auth(context) {
-    console.log("CHECK AUTH");
     if (JwtService.getToken()) {
       ApiService.auth();
       ApiService.get("user")

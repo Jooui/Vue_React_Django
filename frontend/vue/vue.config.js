@@ -3,5 +3,14 @@ module.exports = {
   devServer: {
     proxy: "http://localhost:8000/",
   },
-  //   css: ["./src/App.css"],
+  // css: {
+  //   loaderOptions: {
+  //     sass: {
+  //       data: `
+  //         @import "@/scss/_variables.scss";
+  //         @import "@/scss/_mixins.scss";
+  //       `
+  //     }
+  //   }
+  // }
 };

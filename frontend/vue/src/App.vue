@@ -1,18 +1,18 @@
 <template>
   <div>
-    <Header />
+    <mainheader/>
     <router-view />
   </div>
 </template>
 <script>
-import Header from "@/components/layout/header";
+import mainheader from "@/components/layout/newheader";
 import "./App.css";
 // import Headersax from "@/components/layout/headersax";
 
 export default {
   name: "App",
   components: {
-    Header,
+    mainheader,
   },
 };
 </script>
