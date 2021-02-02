@@ -1,12 +1,13 @@
 // import createHttp from "@/services/http";
 // import router from "@/router";
-import ApiService from '@/services/api.service'
+import ApiService from "@/services/api.service";
 import JwtService from "@/services/jwt.service";
 
 const state = {
   errors: null,
   user: {},
-  isAuthenticated: !!JwtService.getToken()
+  isAuthenticated: !!JwtService.getToken(),
+  // isAuthenticated: null
 };
 
 const getters = {
@@ -16,28 +17,28 @@ const getters = {
   isAuthenticated(state) {
     return state.isAuthenticated;
   },
-  errors(state){
+  errors(state) {
     return state.errors;
-  }
+  },
 };
 
 const actions = {
   login(context, credentials) {
-    return new Promise(resolve => {
-      ApiService.post("users/login", credentials, 'auth')
+    return new Promise((resolve) => {
+      ApiService.post("users/login", credentials, "auth")
         .then(({ data }) => {
           console.log(data);
-          context.commit('setAuth', data.user);
+          context.commit("setAuth", data.user);
           resolve(data);
         })
-        .catch(({response} ) => {
+        .catch(({ response }) => {
           // console.log("FAIL LOGIN");
-          context.commit('setError', response.data.errors);
+          context.commit("setError", response.data.errors);
         });
     });
   },
   logout(context) {
-    context.commit("purgeAuth")
+    context.commit("purgeAuth");
     // location.reload();
   },
   check_auth(context) {
@@ -48,13 +49,15 @@ const actions = {
           context.commit("setAuth", data.user);
         })
         .catch(({ response }) => {
+          context.commit("purgeAuth");
+          location.reload();
           context.commit("setError", response.data.errors);
         });
     } else {
       context.commit("purgeAuth");
     }
   },
-}
+};
 
 const mutations = {
   setError(state, error) {
@@ -72,12 +75,12 @@ const mutations = {
     state.user = {};
     state.errors = {};
     JwtService.destroyToken();
-  }
-}
+  },
+};
 
 export default {
   state,
   actions,
   mutations,
-  getters
+  getters,
 };

@@ -1,8 +1,8 @@
 import store from "@/store";
 
-const authGuard = (to, from, next) => {
+const authGuard = async (to, from, next) => {
     if (store.getters.isAuthenticated) {
-        next();
+        await next();
     } else {
         next("/login")
     }
