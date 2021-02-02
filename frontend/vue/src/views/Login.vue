@@ -122,9 +122,6 @@ export default {
 </script>
 
 <style>
-.navbar{
-  display:none;
-}
 
 .error-messages {
   display: flex;

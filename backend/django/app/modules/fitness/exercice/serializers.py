@@ -15,13 +15,13 @@ class ExerciceSerializer(serializers.HyperlinkedModelSerializer):
     #     return obj.name+"FULLNAME"
 
     author = ProfileSerializer(read_only=True)
-    # categories = CategorySerializer()
+    categories = CategorySerializer(many=True)
     description = serializers.CharField(required=False)
 
     class Meta:
         model = Exercice
-        fields = ('id', 'slug', 'name', 'description', 'image', 'author')
-        # fields = ('id', 'slug', 'name', 'description', 'image', 'author', 'categories')
+        # fields = ('id', 'slug', 'name', 'description', 'image', 'author')
+        fields = ('id', 'slug', 'name', 'description', 'image', 'author', 'categories')
 
     
     def create(self, validated_data):

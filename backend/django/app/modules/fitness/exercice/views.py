@@ -9,7 +9,8 @@ from .models import Exercice
 class ExerciceViewSet(viewsets.ModelViewSet):
     queryset = Exercice.objects.all().order_by('name')
     serializer_class = ExerciceSerializer
-
+    # Para buscar por slug
+    lookup_field = 'slug'
     def create(self, request):
         serializer_context = {
             'author': request.user.profile,

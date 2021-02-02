@@ -1,6 +1,7 @@
 <template>
     <div class="HOME">
         <span>HOME</span>
+        <exercice/>
         <!-- <input :value="data" @input="change">
         <button type="button" @click="change">Click Me!</button>
         <span>DATA: {{data}}</span>
@@ -8,24 +9,14 @@
     </div>
 </template>
 <script>
-// import store from '../store/index'
-// import { mapGetters,mapActions } from "vuex";
-
-//    export default{
-       
-//         computed: {
-//             ...mapGetters(["data","articlesCount"]),
-//         },
-//         methods: {
-//             ...mapActions([ 
-//                 'updatedataAction'
-//             ]),
-//             change: function(e) {
-//                 this.updatedataAction(e.target.value)
-//             }
-//         }
-
-//    }
+import exercice from "@/components/exercices/exercice";
+export default {
+  name: "Home",
+  components: {
+    exercice
+  },
+};
+   
 </script>
 <style scoped>
 

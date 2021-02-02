@@ -11,6 +11,7 @@ class Exercice(models.Model):
     image = models.CharField(max_length=60, null = True)
 
     author = models.ForeignKey('profiles.Profile', on_delete=models.CASCADE, related_name='exers')
+    categories = models.ManyToManyField(Category, blank=True)
     # categories = models.ManyToManyField(Category, related_name='categoriess') #FUNCIONAVA MIGRATE
 
     # categories = models.ManyToManyField(Category, through='ExerciceCategory', on_delete=models.CASCADE, related_name='categories')
