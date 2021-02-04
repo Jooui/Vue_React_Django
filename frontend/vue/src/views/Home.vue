@@ -1,12 +1,6 @@
 <template>
-  <div class="HOME">
-    <span>HOME</span>
-    <!-- <exercice /> -->
-    <exercices-list />
-    <!-- <input :value="data" @input="change">
-        <button type="button" @click="change">Click Me!</button>
-        <span>DATA: {{data}}</span>
-        <span>ARTICLES COUNT {{articlesCount}}</span> -->
+  <div class="page-home">
+    <exercices-list type="all"/>
   </div>
 </template>
 <script>
@@ -18,4 +12,12 @@ export default {
   },
 };
 </script>
-<style scoped></style>
+<style scoped>
+.page-home {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+</style>

@@ -476,6 +476,9 @@ body {
   padding: 25px;
   flex-grow: 1;
   overflow: auto;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
 }
 
 .profile {
