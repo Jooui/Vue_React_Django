@@ -12,9 +12,6 @@
   </div>
 </template>
 
-
-
-
 <script>
 import { mapGetters } from "vuex";
 export default {
@@ -54,14 +51,14 @@ img {
   max-width: 100%;
 }
 .video video {
-  transition: 0.4s;
+  transition: 0.1s;
   max-width: 100%;
   display: block;
   border-radius: 4px 4px 0 0;
 }
 
 .video {
-    max-width: 400px;
+  max-width: 320px;
   overflow: hidden;
   box-shadow: -1px 3px 8px -1px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
@@ -72,7 +69,7 @@ img {
     opacity: 0;
   }
   &:hover video {
-    transform: scale(2.2);
+    transform: scale(1.6);
     transform-origin: center;
   }
   &:hover .view {

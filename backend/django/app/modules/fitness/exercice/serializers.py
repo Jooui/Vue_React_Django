@@ -1,32 +1,35 @@
 from rest_framework import serializers
 from app.modules.profiles.serializers import ProfileSerializer
+from app.modules.fitness.category.models import Category
 from app.modules.fitness.category.serializers import CategorySerializer
 
 from .models import Exercice
 
-class ExerciceSerializer(serializers.HyperlinkedModelSerializer):
-    # fullname = serializers.SerializerMethodField()
-    # concatenar = serializers.SerializerMethodField('asdf')
-
-    # def asdf(self,obj):
-    #     return obj.name+"STRING"
-    
-    # def get_fullname(self,obj):
-    #     return obj.name+"FULLNAME"
-
+class ExerciceSerializer(serializers.ModelSerializer):
+    #Declaramos categories como READ ONLY (ya que solo lo gastaremos para mostrar)
+    categories = CategorySerializer(many=True, read_only=True)
+    #declaramos tambien categories_id para al realizar el insert pongamos solo las ID (write only)
+    categories_id = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), write_only=True,many=True)
     author = ProfileSerializer(read_only=True)
-    categories = CategorySerializer(many=True)
     description = serializers.CharField(required=False)
 
     class Meta:
         model = Exercice
-        # fields = ('id', 'slug', 'name', 'description', 'image', 'author')
-        fields = ('id', 'slug', 'name', 'description', 'image', 'author', 'categories')
+        #añadimos el campo categories y categories_id
+        fields = ('id', 'slug', 'name', 'description', 'image', 'author', 'categories','categories_id')
 
     
     def create(self, validated_data):
+        #a categories añadimos las ID insertadas al realizar el POST
+        categories = validated_data.pop('categories_id')
         author = self.context.get('author', None)
         exercice = Exercice.objects.create(author=author, **validated_data)
+
+        #hacemos un for por todas las categorias y las añadimos una a una a categories
+        for category in categories:
+            exercice.categories.add(category)
+
+        
         return exercice
 
 

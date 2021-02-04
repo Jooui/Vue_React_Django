@@ -25,5 +25,7 @@ class Category(models.Model):
     #     self.slug = slugify(self.name)+"-"+str(randint(1000,9999))
     #     super(Category, self).save(*args, **kwargs)
 
-    def __str__(self):
-        return self.name
+    # def __str__(self):
+    #     return self.name
+
+

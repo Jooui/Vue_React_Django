@@ -20,7 +20,7 @@
             alt=""
             class="profile-cover"
           />
-          
+
           <div class="profile-info">
             <div class="profile-item">
               <svg
@@ -674,7 +674,7 @@ body {
     opacity: 0;
   }
   &:hover video {
-    transform: scale(2.2);
+    transform: scale(1.4);
     transform-origin: center;
   }
   &:hover .view {

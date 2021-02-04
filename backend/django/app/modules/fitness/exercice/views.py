@@ -11,10 +11,21 @@ class ExerciceViewSet(viewsets.ModelViewSet):
     serializer_class = ExerciceSerializer
     # Para buscar por slug
     lookup_field = 'slug'
+    def get_queryset(self):
+        queryset = self.queryset
+        
+        author = self.request.query_params.get('author', None)
+        if author is not None:
+            queryset = queryset.filter(author__user__username=author)
+
+        categories = self.request.query_params.get('categories', None)
+        print(categories)
+        return queryset
+
     def create(self, request):
         serializer_context = {
             'author': request.user.profile,
-            'request': request
+            'request': request,
         }
         serializer_data = request.data.get('exercice', {})
 
