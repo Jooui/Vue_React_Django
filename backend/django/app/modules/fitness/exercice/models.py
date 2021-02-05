@@ -8,7 +8,7 @@ class Exercice(models.Model):
     slug = models.SlugField(unique=True, null = True, blank = True)
     name = models.CharField(max_length=60)
     description = models.TextField()
-    image = models.CharField(max_length=60, null = True)
+    image = models.CharField(max_length=255, null = True)
 
     author = models.ForeignKey('profiles.Profile', on_delete=models.CASCADE, related_name='exers')
     # categories = models.ManyToManyField(Category, blank=True)

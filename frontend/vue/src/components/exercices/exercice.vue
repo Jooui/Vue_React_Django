@@ -1,23 +1,62 @@
 <template>
-  <div class="video">
+  <div class="video" @click="showModal">
     <div class="video-time">15.13</div>
-    <video muted>
-      <source
-        src="https://player.vimeo.com/external/368244254.sd.mp4?s=2dc98d46cc5c55913b309928d1d14769f76bc6f9&profile_id=139&oauth2_token_id=57447761"
-        type="video/mp4"
-      />
-    </video>
-    <div class="video-content">Planning Helps Make</div>
-    <div class="view">15.4k views</div>
+    <!-- <video muted>
+      <source :src="bgImage()" type="image/jpg" />
+    </video> -->
+    <!-- <div class="image-contaner"> -->
+    <!-- <img :src="bgImage()" alt="exer imagen" /> -->
+
+    <img :src="exercice.image" alt="exer imagen" />
+
+    <!-- </div> -->
+    <div class="video-content">{{ exercice.name }}</div>
+    <div class="view">{{ exercice.slug }}</div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import flexiones from "@/assets/img/exercices/flexiones.jpg";
+// import exerciceDetails from "@/components/exercices/exercice_details";
 export default {
   name: "exercice",
   computed: {
     ...mapGetters(["currentUser", "isAuthenticated"]),
+    bgImage() {
+      console.log(flexiones);
+      return flexiones;
+    },
+  },
+  props: {
+    exercice: {
+      type: Object,
+      required: false,
+    },
+  },
+  watch: {
+    exercice: {
+      handler(exercice) {
+        console.log(exercice); //Debug
+      },
+      deep: true,
+    },
+  },
+  components: {
+    // exerciceDetails,
+  },
+  data() {
+    return {
+      isModalVisible: false,
+    };
+  },
+  methods: {
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
+    },
   },
 };
 </script>
@@ -50,11 +89,13 @@ export default {
 img {
   max-width: 100%;
 }
-.video video {
-  transition: 0.1s;
+.video img {
+  transition: 0.3s;
   max-width: 100%;
   display: block;
   border-radius: 4px 4px 0 0;
+  object-fit: cover;
+  // min-height: 190px;
 }
 
 .video {
@@ -68,7 +109,7 @@ img {
   &:hover .video-time {
     opacity: 0;
   }
-  &:hover video {
+  &:hover img {
     transform: scale(1.6);
     transform-origin: center;
   }

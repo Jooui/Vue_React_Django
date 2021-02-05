@@ -5,24 +5,24 @@ const initialState = {
     name: "",
     description: "",
     image: "",
-    categories: []
+    categories: [],
   },
   exercices: [],
-  isLoading: true,
-  articlesCount: 0
+  exercicesCount: 0,
 };
-
 
 export const state = { ...initialState };
 
 export const actions = {
   fetch_exercices({ commit }, params) {
+    console.log(params.filters);
     commit("fetch_start");
     return ExercicesService.query(params.type, params.filters)
       .then(({ data }) => {
+        console.log(data);
         commit("fetch_end", data);
       })
-      .catch(error => {
+      .catch((error) => {
         throw new Error(error);
       });
   },
@@ -63,9 +63,9 @@ export const mutations = {
   fetch_start(state) {
     state.isLoading = true;
   },
-  fetch_end(state, { exercices, exercicesCount }) {
-    state.exercices = exercices;
-    state.exercicesCount = exercicesCount;
+  fetch_end(state, data) {
+    state.exercices = data.results;
+    state.exercicesCount = data.count;
     state.isLoading = false;
   },
   // [SET_COMMENTS](state, comments) {
@@ -99,12 +99,12 @@ const getters = {
   },
   tags(state) {
     return state.tags;
-  }
+  },
 };
 
 export default {
   state,
   actions,
   mutations,
-  getters
+  getters,
 };

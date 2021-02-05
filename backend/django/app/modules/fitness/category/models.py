@@ -19,7 +19,7 @@ from django.db import models
 class Category(models.Model):
     # slug = models.SlugField(unique=True, null = True, blank = True)
     name = models.CharField(max_length=60)
-    image = models.CharField(max_length=60, null = True)
+    image = models.CharField(max_length=254, null = True)
 
     # def save(self, *args, **kwargs):
     #     self.slug = slugify(self.name)+"-"+str(randint(1000,9999))

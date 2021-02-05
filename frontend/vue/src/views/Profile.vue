@@ -34,7 +34,7 @@
               </svg>
               1,702
             </div>
-            <div class="profile-item">
+            <!-- <div class="profile-item">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
@@ -48,7 +48,7 @@
                 />
               </svg>
               1,503
-            </div>
+            </div> -->
             <div class="profile-item">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -71,19 +71,25 @@
                   d="M350.2 54.53H61.45C27.64 54.53 0 82.18 0 115.97v179.2c0 33.8 27.65 61.44 61.44 61.44H349.7c33.79 0 61.44-27.65 61.44-61.44v-179.2c.5-33.8-27.14-61.44-60.93-61.44zM287.75 210.7a11.96 11.96 0 01-3.58 3.59l-119.3 70.65a9.93 9.93 0 01-13.82-3.58 8.65 8.65 0 01-1.54-5.12V134.92c0-5.64 4.61-10.24 10.24-10.24 1.54 0 3.59.5 5.12 1.53l119.3 70.66c4.6 3.07 6.66 9.21 3.58 13.82z"
                 />
               </svg>
-              234
+              {{ exercicesCount }}
             </div>
           </div>
           <div class="profile-menu">
             <div class="profile-avatar">
-              <img class="profile-img" src="{{currentUser.image}}" alt="" />
+              <img class="profile-img" :src="currentUser.image" alt="" />
               <div class="profile-name">{{ currentUser.username }}</div>
             </div>
             <div class="menu-items">
-              <a class="profile-menu-link ">Main</a>
-              <a class="profile-menu-link active">Videos</a>
-              <a class="profile-menu-link">Playlists</a>
-              <a class="profile-menu-link">About</a>
+              <a class="profile-menu-link" @click="tabChange('update')">Main</a>
+              <a class="profile-menu-link" @click="tabChange('exercices')"
+                >Exercices</a
+              >
+              <a class="profile-menu-link" @click="tabChange('update')"
+                >Playlists</a
+              >
+              <a class="profile-menu-link" @click="tabChange('update')"
+                >Update Profile</a
+              >
             </div>
             <div class="follow-buttons">
               <button class="follow">645,321</button>
@@ -91,96 +97,11 @@
             </div>
           </div>
         </div>
-        <div class="videos">
-          <div class="video">
-            <div class="video-time">15.13</div>
-            <video muted>
-              <source
-                src="https://player.vimeo.com/external/368244254.sd.mp4?s=2dc98d46cc5c55913b309928d1d14769f76bc6f9&profile_id=139&oauth2_token_id=57447761"
-                type="video/mp4"
-              />
-            </video>
-            <div class="video-content">Planning Helps Make</div>
-            <div class="view">15.4k views</div>
-          </div>
-          <div class="video">
-            <div class="video-time">13.10</div>
-            <video muted>
-              <source
-                src="https://player.vimeo.com/external/356200184.sd.mp4?s=f528556cafba1d369984dc341104e7eef8bb71bb&profile_id=139&oauth2_token_id=57447761"
-                type="video/mp4"
-              />
-            </video>
-            <div class="video-content">This Is Cloaud Break</div>
-            <div class="view">13.2k views</div>
-          </div>
-          <div class="video">
-            <div class="video-time">15.30</div>
-            <video muted>
-              <source
-                src="https://player.vimeo.com/external/364324653.sd.mp4?s=7ded2b451ac7f5dfaf1375277aa0308cdf5d011c&profile_id=139&oauth2_token_id=57447761"
-                type="video/mp4"
-              />
-            </video>
-            <div class="video-content">Lost Your Mind</div>
-            <div class="view">11.7k views</div>
-          </div>
-          <div class="video">
-            <div class="video-time">11.30</div>
-            <video muted>
-              <source
-                src="https://player.vimeo.com/external/399004885.sd.mp4?s=1d39443bef9856dacc4d3ba2c6be0881e38b7e66&profile_id=139&oauth2_token_id=57447761"
-                type="video/mp4"
-              />
-            </video>
-            <div class="video-content">Planning Helps Make</div>
-            <div class="view">9.2k views</div>
-          </div>
-          <div class="video">
-            <div class="video-time">6.35</div>
-            <video muted>
-              <source
-                src="https://player.vimeo.com/external/353556576.sd.mp4?s=8e942d8680fe908418143e63e04b8798982d5bea&profile_id=139&oauth2_token_id=57447761"
-                type="video/mp4"
-              />
-            </video>
-            <div class="video-content">Research In Advertising</div>
-            <div class="view">18.4k views</div>
-          </div>
-          <div class="video">
-            <div class="video-time">2.21</div>
-            <video muted>
-              <source
-                src="https://player.vimeo.com/external/368556609.sd.mp4?s=3fa896a1d6d8c04382a9b8f33053d2eaabe4342b&profile_id=139&oauth2_token_id=57447761"
-                type="video/mp4"
-              />
-            </video>
-            <div class="video-content">See The Unmatched</div>
-            <div class="view">3.4k views</div>
-          </div>
-          <div class="video">
-            <div class="video-time">12.10</div>
-            <video muted>
-              <source
-                src="https://player.vimeo.com/external/285489976.sd.mp4?s=4fa6461f93f18e0d6cfc30461fffb05311d60a28&profile_id=164&oauth2_token_id=57447761"
-                type="video/mp4"
-              />
-            </video>
-            <div class="video-content">Dance In The Air</div>
-            <div class="view">17.4k views</div>
-          </div>
-          <div class="video">
-            <div class="video-time">7.50</div>
-            <video muted>
-              <source
-                src="https://player.vimeo.com/external/325725646.sd.mp4?s=763c0f293299052689f8344b3a155ea2b4a1c92b&profile_id=164&oauth2_token_id=57447761"
-                type="video/mp4"
-              />
-            </video>
-            <div class="video-content">Sadness Will Last Forever</div>
-            <div class="view">12.6k views</div>
-          </div>
+        {{ currentTab }}
+        <div v-if="currentTab == 'exercices'">
+          <exercices-list :author="currentUser.username" :items-per-page="5" />
         </div>
+
         <div class="load-more">
           <!-- <svg id="me" xmlns="http://w3.org/2000/svg" viewBox="0 0 341.333 341.333" fill="currentColor">
         <path d="M341.227 149.333V0l-50.133 50.133C260.267 19.2 217.707 0 170.56 0 76.267 0 .107 76.373.107 170.667s76.16 170.667 170.453 170.667c79.467 0 146.027-54.4 164.907-128h-44.373c-17.6 49.707-64.747 85.333-120.533 85.333-70.72 0-128-57.28-128-128s57.28-128 128-128c35.307 0 66.987 14.72 90.133 37.867l-68.8 68.8h149.333z" />
@@ -194,18 +115,32 @@
 <script>
 import store from "@/store";
 import { mapGetters } from "vuex";
-
+import exercicesList from "@/components/exercices/exercices_list";
 export default {
+  name: "Profile",
+  data: function() {
+    return {
+      currentTab: "exercices",
+    };
+  },
+  components: {
+    exercicesList,
+  },
   methods: {
     logout() {
       store.dispatch("logout").then(() => this.$router.push({ name: "Home" }));
     },
-    // getCurrentUser(){
-    //   console.log(this.currentUser.email);
-    // },
+    tabChange(tab) {
+      this.currentTab = tab;
+    },
   },
   computed: {
-    ...mapGetters(["currentUser", "isAuthenticated", "errors"]),
+    ...mapGetters([
+      "currentUser",
+      "isAuthenticated",
+      "errors",
+      "exercicesCount",
+    ]),
   },
 };
 </script>
@@ -538,7 +473,10 @@ body {
 }
 
 .profile-menu-link {
-  padding: 20px;
+  color: black;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 9px;
   transition: 0.2s;
   &.active,
   &:hover {
