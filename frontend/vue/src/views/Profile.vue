@@ -80,16 +80,9 @@
               <div class="profile-name">{{ currentUser.username }}</div>
             </div>
             <div class="menu-items">
-              <a class="profile-menu-link" @click="tabChange('update')">Main</a>
-              <a class="profile-menu-link" @click="tabChange('exercices')"
-                >Exercices</a
-              >
-              <a class="profile-menu-link" @click="tabChange('update')"
-                >Playlists</a
-              >
-              <a class="profile-menu-link" @click="tabChange('update')"
-                >Update Profile</a
-              >
+              <a class="profile-menu-link" :class="[currentTab == 'main' ? 'active' : '']" @click="tabChange('main')">Main</a>
+              <a class="profile-menu-link" :class="[currentTab == 'exercices' ? 'active' : '']" @click="tabChange('exercices')">Exercices</a>
+              <a class="profile-menu-link" :class="[currentTab == 'update' ? 'active' : '']" @click="tabChange('update')">Update Profile</a>
             </div>
             <div class="follow-buttons">
               <button class="follow">645,321</button>
@@ -97,15 +90,13 @@
             </div>
           </div>
         </div>
-        {{ currentTab }}
         <div v-if="currentTab == 'exercices'">
           <exercices-list :author="currentUser.username" :items-per-page="5" />
         </div>
-
+        <div v-if="currentTab == 'update'">
+          <UpdateProfile/>
+        </div>
         <div class="load-more">
-          <!-- <svg id="me" xmlns="http://w3.org/2000/svg" viewBox="0 0 341.333 341.333" fill="currentColor">
-        <path d="M341.227 149.333V0l-50.133 50.133C260.267 19.2 217.707 0 170.56 0 76.267 0 .107 76.373.107 170.667s76.16 170.667 170.453 170.667c79.467 0 146.027-54.4 164.907-128h-44.373c-17.6 49.707-64.747 85.333-120.533 85.333-70.72 0-128-57.28-128-128s57.28-128 128-128c35.307 0 66.987 14.72 90.133 37.867l-68.8 68.8h149.333z" />
-        </svg> -->
           Load More
         </div>
       </div>
@@ -116,6 +107,7 @@
 import store from "@/store";
 import { mapGetters } from "vuex";
 import exercicesList from "@/components/exercices/exercices_list";
+import UpdateProfile from "@/components/profile/updateProfile";
 export default {
   name: "Profile",
   data: function() {
@@ -125,6 +117,7 @@ export default {
   },
   components: {
     exercicesList,
+    UpdateProfile
   },
   methods: {
     logout() {

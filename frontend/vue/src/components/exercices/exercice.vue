@@ -1,24 +1,22 @@
 <template>
-  <div class="video" @click="showModal">
-    <div class="video-time">15.13</div>
-    <!-- <video muted>
-      <source :src="bgImage()" type="image/jpg" />
-    </video> -->
-    <!-- <div class="image-contaner"> -->
-    <!-- <img :src="bgImage()" alt="exer imagen" /> -->
+  <div>
+    <exerciceDetails :state="isModalVisible" />
+    <div class="video" @click="showModal">
+      <div class="video-time">15.13</div>
 
-    <img :src="exercice.image" alt="exer imagen" />
+      <img :src="exercice.image" alt="exer imagen" />
 
-    <!-- </div> -->
-    <div class="video-content">{{ exercice.name }}</div>
-    <div class="view">{{ exercice.slug }}</div>
+      <!-- </div> -->
+      <div class="video-content">{{ exercice.name }}</div>
+      <div class="view">{{ exercice.slug }}</div>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import flexiones from "@/assets/img/exercices/flexiones.jpg";
-// import exerciceDetails from "@/components/exercices/exercice_details";
+import exerciceDetails from "@/components/exercices/exercice_details";
 export default {
   name: "exercice",
   computed: {
@@ -43,7 +41,7 @@ export default {
     },
   },
   components: {
-    // exerciceDetails,
+    exerciceDetails,
   },
   data() {
     return {
@@ -52,10 +50,7 @@ export default {
   },
   methods: {
     showModal() {
-      this.isModalVisible = true;
-    },
-    closeModal() {
-      this.isModalVisible = false;
+      this.isModalVisible = this.isModalVisible == true ? false : true;
     },
   },
 };

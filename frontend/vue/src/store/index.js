@@ -4,6 +4,7 @@ import home from "./home.module";
 import login from "./login.module";
 import register from "./register.module";
 import exercices from "./exercices.module";
+import profile from "./profile.module"
 
 
 const store = createStore({
@@ -11,7 +12,8 @@ const store = createStore({
         home,
         login,
         register,
-        exercices
+        exercices,
+        profile
     }
 });
 
