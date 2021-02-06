@@ -4,6 +4,8 @@ import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
 import About from "@/views/About.vue";
 import Profile from "@/views/Profile.vue";
+import ExerciceUpload from "@/views/ExerciceUpload.vue";
+
 import NotFound from "@/views/NotFound.vue";
 import authGuard from "@/common/AuthGuard";
 
@@ -36,6 +38,12 @@ const routes = [
     path: "/profile",
     name: "Profile",
     component: Profile,
+    beforeEnter: authGuard
+  },
+  {
+    path: "/exercices/upload",
+    name: "ExerciceUpload",
+    component: ExerciceUpload,
     beforeEnter: authGuard
   },
   {

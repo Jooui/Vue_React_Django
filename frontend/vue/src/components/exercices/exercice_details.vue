@@ -14,10 +14,11 @@
 export default {
   name: "exerciceDetails",
   
-  method:{
+  methods:{
     closeModal() {
-      // this.state = false
+      this.$parent.showModal();
     },
+    
   },
   
   props:[

@@ -13,18 +13,19 @@
 
       <div class="navbar-menu" id="open-navbar1">
         <ul class="navbar-nav">
-          <li><a href="#">Home</a></li>
+          <li><router-link :to="{ name: 'Home' }" >Home</router-link></li>
           <li class="navbar-dropdown">
             <div href="#" class="dropdown-toggler dropdown-title" data-dropdown="my-dropdown-id">
-              Categories <i class="fa fa-angle-down"></i>
+              Exercices <i class="fa fa-angle-down"></i>
             </div>
             <ul class="dropdown" id="my-dropdown-id">
-              <li><a href="#">Actions</a></li>
-              <li><a href="#">Something else here</a></li>
+              <li><a href="#">Upload Exercice</a></li>
               <li class="separator"></li>
-              <li><a href="#">Seprated link</a></li>
+              <li><a href="#">Popular Exercices</a></li>
               <li class="separator"></li>
-              <li><a href="#">One more seprated link.</a></li>
+              <li><a href="#">Latest Exercices</a></li>
+              <li class="separator"></li>
+              <li><a href="#">Official Exercices</a></li>
             </ul>
           </li>
           <li class="navbar-dropdown">
