@@ -12,11 +12,12 @@ class ExerciceSerializer(serializers.ModelSerializer):
     categories_id = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), write_only=True,many=True)
     author = ProfileSerializer(read_only=True)
     description = serializers.CharField(required=False)
+    verified = serializers.BooleanField(default=False)
 
     class Meta:
         model = Exercice
         #añadimos el campo categories y categories_id
-        fields = ('id', 'slug', 'name', 'description', 'image', 'author', 'categories','categories_id')
+        fields = ('id', 'slug', 'name', 'description', 'image', 'author','verified', 'categories','categories_id')
 
     
     def create(self, validated_data):
