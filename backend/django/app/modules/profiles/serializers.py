@@ -6,7 +6,8 @@ from .models import Profile
 class ProfileSerializer(serializers.ModelSerializer):
     username = serializers.CharField(source='user.username')
     bio = serializers.CharField(allow_blank=True, required=False)
-    image = serializers.SerializerMethodField()
+    image = serializers.CharField(allow_blank=True, required=False) #para que funcione el UPDATE de la imagen
+    # image = serializers.SerializerMethodField()
     following = serializers.SerializerMethodField()
 
     class Meta:
@@ -15,6 +16,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         read_only_fields = ('username',)
 
     def get_image(self, obj):
+        print("GET IMAGE ")
         if obj.image:
             return obj.image
 

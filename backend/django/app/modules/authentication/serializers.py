@@ -113,6 +113,7 @@ class UserSerializer(serializers.ModelSerializer):
     # so. Moreover, `UserSerializer` should never expose profile information,
     # so we set `write_only=True`.
     profile = ProfileSerializer(write_only=True)
+    # print(profile)
     
     # We want to get the `bio` and `image` fields from the related Profile
     # model.
@@ -122,9 +123,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'email', 'username', 'password', 'token', 'profile', 'bio', 
-            'image',
-        )
+            'email', 'username', 'password', 'token', 'profile', 'bio', 'image')
 
         # The `read_only_fields` option is an alternative for explicitly
         # specifying the field with `read_only=True` like we did for password
@@ -149,7 +148,8 @@ class UserSerializer(serializers.ModelSerializer):
         # Like passwords, we have to handle profiles separately. To do that,
         # we remove the profile data from the `validated_data` dictionary.
         profile_data = validated_data.pop('profile', {})
-
+        # print(validated_data.pop('profile', {}))
+        # print(profile_data)
         for (key, value) in validated_data.items():
             # For the keys remaining in `validated_data`, we will set them on
             # the current `User` instance one at a time.
@@ -166,6 +166,9 @@ class UserSerializer(serializers.ModelSerializer):
         instance.save()
 
         for (key, value) in profile_data.items():
+            # print(key)
+            # print(value)
+            # print(profile_data.items())
             # We're doing the same thing as above, but this time we're making
             # changes to the Profile model.
             setattr(instance.profile, key, value)

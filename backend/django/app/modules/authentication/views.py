@@ -72,7 +72,7 @@ class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
                 'image': user_data.get('image', request.user.profile.image)
             }
         }
-
+        print(serializer_data)
         # Here is that serialize, validate, save pattern we talked about
         # before.
         serializer = self.serializer_class(
@@ -80,6 +80,6 @@ class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
         )
         serializer.is_valid(raise_exception=True)
         serializer.save()
-
+        print(serializer.data)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
