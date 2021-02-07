@@ -27,6 +27,10 @@
   --header-height: 80px;
 }
 
+body {
+  font-family: Poppins-Medium;
+}
+
 .info-msg,
 .success-msg,
 .warning-msg,

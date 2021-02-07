@@ -1,14 +1,16 @@
 <template>
   <div>
-    <exerciceDetails :state="isModalVisible" />
+    <exerciceDetails :state="isModalVisible" :exercice="exercice" />
     <div class="video" @click="showModal">
       <div class="video-time">15.13</div>
 
       <img :src="exercice.image" alt="exer imagen" />
 
       <!-- </div> -->
-      <div class="video-content">{{ exercice.name }}</div>
-      <div class="view">{{ exercice.slug }}</div>
+      <div class="exercice_text">
+        <div class="video-content">{{ exercice.name }}</div>
+        <div class="view">{{ exercice.slug }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -94,6 +96,7 @@ img {
 }
 
 .video {
+  height: 100%;
   max-width: 320px;
   overflow: hidden;
   box-shadow: -1px 3px 8px -1px rgba(0, 0, 0, 0.1);
@@ -101,6 +104,9 @@ img {
   position: relative;
   background-color: var(--header-bg-color);
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   &:hover .video-time {
     opacity: 0;
   }
@@ -125,15 +131,20 @@ img {
   transition: 0.3s ease-in;
 }
 
-.video-content {
+.exercice_text {
   width: 100%;
   max-width: 400px;
   color: var(--main-color);
-  padding: 15px 10px 0;
+  padding: 5px 10px 0;
   border-radius: 0 0 4px 4px;
   font-size: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  justify-self: flex-end;
+}
+.view {
 }
 </style>

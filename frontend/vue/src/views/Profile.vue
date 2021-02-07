@@ -80,9 +80,24 @@
               <div class="profile-name">{{ currentUser.username }}</div>
             </div>
             <div class="menu-items">
-              <a class="profile-menu-link" :class="[currentTab == 'main' ? 'active' : '']" @click="tabChange('main')">Main</a>
-              <a class="profile-menu-link" :class="[currentTab == 'exercices' ? 'active' : '']" @click="tabChange('exercices')">Exercices</a>
-              <a class="profile-menu-link" :class="[currentTab == 'update' ? 'active' : '']" @click="tabChange('update')">Update Profile</a>
+              <a
+                class="profile-menu-link"
+                :class="[currentTab == 'main' ? 'active' : '']"
+                @click="tabChange('main')"
+                >Main</a
+              >
+              <a
+                class="profile-menu-link"
+                :class="[currentTab == 'exercices' ? 'active' : '']"
+                @click="tabChange('exercices')"
+                >Exercices</a
+              >
+              <a
+                class="profile-menu-link"
+                :class="[currentTab == 'update' ? 'active' : '']"
+                @click="tabChange('update')"
+                >Update Profile</a
+              >
             </div>
             <div class="follow-buttons">
               <button class="follow">645,321</button>
@@ -94,7 +109,7 @@
           <exercices-list :author="currentUser.username" :items-per-page="5" />
         </div>
         <div v-if="currentTab == 'update'">
-          <UpdateProfile/>
+          <UpdateProfile />
         </div>
         <div class="load-more">
           Load More
@@ -117,7 +132,7 @@ export default {
   },
   components: {
     exercicesList,
-    UpdateProfile
+    UpdateProfile,
   },
   methods: {
     logout() {
@@ -438,7 +453,7 @@ body {
   width: 100%;
   box-shadow: -1px 3px 8px -1px rgba(0, 0, 0, 0.1);
   border-radius: 0 0 4px 4px;
-  padding: 0 25px;
+  padding: 10px 30px;
   z-index: 2;
 }
 

@@ -7,19 +7,28 @@
           <span></span>
           <span></span>
         </button>
-        <router-link :to="{ name: 'Home' }" class="mainHeader_option--link"><h4>Fitness<span>App</span></h4></router-link>
-        
+        <router-link :to="{ name: 'Home' }" class="mainHeader_option--link"
+          ><h4>Fitness<span>App</span></h4></router-link
+        >
       </div>
 
       <div class="navbar-menu" id="open-navbar1">
         <ul class="navbar-nav">
-          <li><router-link :to="{ name: 'Home' }" >Home</router-link></li>
+          <li><router-link :to="{ name: 'Home' }">Home</router-link></li>
           <li class="navbar-dropdown">
-            <div href="#" class="dropdown-toggler dropdown-title" data-dropdown="my-dropdown-id">
+            <div
+              href="#"
+              class="dropdown-toggler dropdown-title"
+              data-dropdown="my-dropdown-id"
+            >
               Exercices <i class="fa fa-angle-down"></i>
             </div>
             <ul class="dropdown" id="my-dropdown-id">
-              <li><a href="#">Upload Exercice</a></li>
+              <li>
+                <router-link :to="{ name: 'ExerciceUpload' }"
+                  >Upload Exercice</router-link
+                >
+              </li>
               <li class="separator"></li>
               <li><a href="#">Popular Exercices</a></li>
               <li class="separator"></li>
@@ -29,7 +38,11 @@
             </ul>
           </li>
           <li class="navbar-dropdown">
-            <div href="#" class="dropdown-toggler dropdown-title" data-dropdown="blog">
+            <div
+              href="#"
+              class="dropdown-toggler dropdown-title"
+              data-dropdown="blog"
+            >
               Blog <i class="fa fa-angle-down"></i>
             </div>
             <ul class="dropdown" id="blog">
@@ -42,10 +55,16 @@
             </ul>
           </li>
           <li><a href="#">About</a></li>
-          <li><a href="#">
-            <router-link v-if="!isAuthenticated" :to="{ name: 'Login' }">Login</router-link>
-            <router-link v-if="isAuthenticated" :to="{ name: 'Profile' }">Profile</router-link>
-          </a></li>
+          <li>
+            <a href="#">
+              <router-link v-if="!isAuthenticated" :to="{ name: 'Login' }"
+                >Login</router-link
+              >
+              <router-link v-if="isAuthenticated" :to="{ name: 'Profile' }"
+                >Profile</router-link
+              >
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -66,7 +85,6 @@ export default {
 
     // Handle dropdown menues
     if (dropdowns.length) {
-
       dropdowns.forEach((dropdown) => {
         dropdown.addEventListener("click", (event) => {
           let target = document.querySelector(
@@ -284,7 +302,8 @@ a {
       }
 
       > li {
-        > a,.dropdown-title {
+        > a,
+        .dropdown-title {
           color: $text-dark;
           text-decoration: none;
           cursor: pointer;
@@ -298,7 +317,8 @@ a {
           }
         }
         &.active {
-          a,.dropdown-title {
+          a,
+          .dropdown-title {
             color: $base-color;
           }
         }
@@ -324,7 +344,8 @@ a {
             box-shadow: none;
           }
           li {
-            a,.dropdown-title {
+            a,
+            .dropdown-title {
               color: $text-dark;
               cursor: pointer;
               padding: 0.25rem 1rem;

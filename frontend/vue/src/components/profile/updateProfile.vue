@@ -2,11 +2,11 @@
   <div class="update_body">
     <div class="login-box">
       <h2>Update profile</h2>
-        <div v-if="errors" class="error-messages">
-            <span class="error-msg" v-for="(value, key) in errors" :key="key">
-            {{ key + ": " + value }}
-            </span>
-        </div>
+      <div v-if="errors" class="error-messages">
+        <span class="error-msg" v-for="(value, key) in errors" :key="key">
+          {{ key + ": " + value }}
+        </span>
+      </div>
       <form @submit.prevent="onSubmit(username, email, bio, image)">
         <div class="user-box">
           <input
@@ -29,18 +29,11 @@
           <label>Email</label>
         </div>
         <div class="user-box">
-          <input
-            name="bio"
-            v-model="bio"
-            type="text"
-             />
+          <input name="bio" v-model="bio" type="text" />
           <label>Bio</label>
         </div>
         <div class="user-box">
-          <input 
-            name="image"
-            v-model="image"
-            type="text" />
+          <input name="image" v-model="image" type="text" />
           <label>Image URL</label>
         </div>
         <a href="#">
@@ -48,9 +41,9 @@
           <span></span>
           <span></span>
           <span></span>
-            <button type="submit" class="button">
-                <p class="button-text">UPDATE</p>
-            </button>
+          <button type="submit" class="button--update">
+            <p class="button-text">UPDATE</p>
+          </button>
         </a>
       </form>
     </div>
@@ -61,38 +54,48 @@
 import { mapGetters } from "vuex";
 import store from "@/store";
 export default {
-    name: "UpdateProfile",
-    computed: {
-        ...mapGetters(["currentUser", "isAuthenticated", "errors"]),
+  name: "UpdateProfile",
+  computed: {
+    ...mapGetters(["currentUser", "isAuthenticated", "errors"]),
+  },
+  data() {
+    return {
+      username: "",
+      email: "",
+      bio: "",
+      image: "",
+    };
+  },
+  mounted: function() {
+    this.username = this.currentUser.username;
+    this.email = this.currentUser.email;
+    this.bio = this.currentUser.bio;
+    this.image = this.currentUser.image;
+  },
+  methods: {
+    onSubmit(username, email, bio, image) {
+      store
+        .dispatch("update_user", { user: { email, username, bio, image } })
+        .then(() => {
+          console.log("success");
+          setTimeout(() => {
+            location.reload();
+          }, 1500);
+        });
     },
-    data(){
-        return {
-        username: "",
-        email:'',
-        bio:'',
-        image:''
-        };
-    },
-    mounted: function(){
-        this.username = this.currentUser.username
-        this.email = this.currentUser.email
-        this.bio = this.currentUser.bio
-        this.image = this.currentUser.image
-    },
-    methods: {
-        onSubmit(username, email, bio, image) {
-            store.dispatch("update_user", { user: { email, username, bio, image } }).then(() => {
-            console.log("success");
-            setTimeout(() => {
-                this.$router.push({ name: "Home" });
-            }, 1500);
-            });
-        },
-    },
+  },
 };
 </script>
 
 <style lang="scss">
+.button--update {
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  font-family: var(--body-font);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+}
 .update_body {
   display: flex;
   align-content: center;
