@@ -63,7 +63,7 @@ export default {
       }
     },
     closeModal() {
-      this.$parent.$parent.showModal();
+      this.$parent.showModal();
     },
     imageDefault(e) {
       e.target.src = IMAGEN_EXERCICE;

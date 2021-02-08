@@ -36,7 +36,6 @@ class ExerciceSerializer(serializers.ModelSerializer):
         #a categories añadimos las ID insertadas al realizar el POST
         categories = validated_data.pop('categories_id')
         author = self.context.get('author', None)
-        print(author.username)       
 
         for (key, value) in validated_data.items():
             setattr(instance, key, value)

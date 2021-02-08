@@ -26,7 +26,7 @@ const routes = [
     path: "/register",
     name: "Register",
     component: Register,
-    // beforeEnter: authGuard
+    // beforeEnter: authGuard 
   },
   {
     path: "/about",
@@ -39,6 +39,11 @@ const routes = [
     name: "Profile",
     component: Profile,
     beforeEnter: authGuard
+  },
+  {
+    path: "/@:username",
+    name: "UsersProfile",
+    component: Profile,
   },
   {
     path: "/exercices/upload",

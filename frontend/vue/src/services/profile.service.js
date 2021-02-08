@@ -4,6 +4,10 @@ const ProfileService = {
     console.log({user: params});
     return ApiService.put("user", {user: params});
   },
+  get(params){
+    console.log(params);
+    return ApiService.put("profiles", params);
+  }
 
 };
 

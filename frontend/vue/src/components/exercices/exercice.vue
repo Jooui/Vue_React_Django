@@ -1,13 +1,14 @@
 <template>
   <div>
-    <transition
+  <!-- <transition
       class="animate__faster"
       enter-active-class="animated fadeIn"
       leave-active-class="animated fadeOut"
     >
       <exerciceDetails :state="isModalVisible" :exercice="exercice" />
-    </transition>
-    <!-- <exerciceDetails :state="isModalVisible" :exercice="exercice" /> -->
+    </transition>-->
+    <exerciceDetails :state="isModalVisible" :exercice="exercice" /> 
+
     <div class="video" @click="showModal">
       <!-- <div class="video-time">15.13</div> -->
 

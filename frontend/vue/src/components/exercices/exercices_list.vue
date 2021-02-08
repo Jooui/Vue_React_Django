@@ -120,7 +120,7 @@ export default {
 
 <style>
 .videos {
-  margin-top: 10px;
+  margin: 30px auto auto auto;
   max-width: 1200px;
 }
 </style>

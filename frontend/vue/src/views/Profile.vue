@@ -146,6 +146,7 @@ export default {
       store.dispatch("logout").then(() => this.$router.push({ name: "Home" }));
     },
     tabChange(tab) {
+      
       this.currentTab = tab;
     },
     imageDefault(e) {
@@ -158,8 +159,15 @@ export default {
       "isAuthenticated",
       "errors",
       "exercicesCount",
+      "profile"
     ]),
   },
+  beforeMount(){
+    console.log(this.$route.params.username);
+    store.dispatch("fetch_profile",this.$route.params.username).then(()=>{console.log(this.profile)})
+    
+
+  }
 };
 </script>
 <style lang="scss">
