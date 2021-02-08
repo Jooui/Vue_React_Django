@@ -24,7 +24,7 @@ export const actions = {
     const { username } = payload;
     console.log("FETCH PROFILE");
     console.log(username);
-    return ProfileService.get("profiles", username)
+    return ProfileService.get(username)
       .then(({ data }) => {
         context.commit("set_profile", data.profile);
         return data;

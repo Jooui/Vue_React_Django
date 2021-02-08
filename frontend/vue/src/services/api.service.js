@@ -18,6 +18,7 @@ const ApiService = {
   },
 
   get(resource, slug = "") {
+    console.log(slug);
     return http.get(`${resource}/${slug}`).catch(error => {
       throw new Error(`[RVD] ApiService ${error}`);
     });

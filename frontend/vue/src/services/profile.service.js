@@ -6,7 +6,7 @@ const ProfileService = {
   },
   get(params){
     console.log(params);
-    return ApiService.put("profiles", params);
+    return ApiService.get("profiles", params);
   }
 
 };
