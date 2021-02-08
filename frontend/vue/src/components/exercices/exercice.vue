@@ -1,13 +1,31 @@
 <template>
   <div>
-    <exerciceDetails :state="isModalVisible" :exercice="exercice" />
+    <transition
+      class="animate__faster"
+      enter-active-class="animated fadeIn"
+      leave-active-class="animated fadeOut"
+    >
+      <exerciceDetails :state="isModalVisible" :exercice="exercice" />
+    </transition>
+    <!-- <exerciceDetails :state="isModalVisible" :exercice="exercice" /> -->
     <div class="video" @click="showModal">
-      <div class="video-time">15.13</div>
+      <!-- <div class="video-time">15.13</div> -->
 
-      <img :src="exercice.image" alt="exer imagen" />
+      <img
+        :src="exercice.image"
+        class="exercice_img"
+        alt="exer imagen"
+        @error="imageDefault"
+      />
 
       <!-- </div> -->
       <div class="exercice_text">
+        <img
+          class="verified"
+          v-if="exercice.verified"
+          src="https://cdn.worldvectorlogo.com/logos/twitter-verified-badge.svg"
+          alt="verified"
+        />
         <div class="video-content">{{ exercice.name }}</div>
         <div class="view">{{ exercice.slug }}</div>
       </div>
@@ -19,12 +37,13 @@
 import { mapGetters } from "vuex";
 import flexiones from "@/assets/img/exercices/flexiones.jpg";
 import exerciceDetails from "@/components/exercices/exercice_details";
+import { IMAGEN_EXERCICE } from "@/store/defaults.type";
+
 export default {
   name: "exercice",
   computed: {
     ...mapGetters(["currentUser", "isAuthenticated"]),
     bgImage() {
-      console.log(flexiones);
       return flexiones;
     },
   },
@@ -34,14 +53,12 @@ export default {
       required: false,
     },
   },
-  watch: {
-    exercice: {
-      handler(exercice) {
-        console.log(exercice); //Debug
-      },
-      deep: true,
-    },
-  },
+  // watch: {
+  //   exercice: {
+  //     handler(exercice) {},
+  //     deep: true,
+  //   },
+  // },
   components: {
     exerciceDetails,
   },
@@ -53,6 +70,9 @@ export default {
   methods: {
     showModal() {
       this.isModalVisible = this.isModalVisible == true ? false : true;
+    },
+    imageDefault(e) {
+      e.target.src = IMAGEN_EXERCICE;
     },
   },
 };
@@ -92,12 +112,14 @@ img {
   display: block;
   border-radius: 4px 4px 0 0;
   object-fit: cover;
-  // min-height: 190px;
+  height: 70%;
+  z-index: 1;
 }
 
 .video {
   height: 100%;
   max-width: 320px;
+  max-height: 290px;
   overflow: hidden;
   box-shadow: -1px 3px 8px -1px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
@@ -107,11 +129,9 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  &:hover .video-time {
-    opacity: 0;
-  }
-  &:hover img {
-    transform: scale(1.6);
+
+  &:hover img.exercice_img {
+    transform: scale(1.5);
     transform-origin: center;
   }
   &:hover .view {
@@ -119,15 +139,13 @@ img {
   }
 }
 
-.video-time {
+.verified {
+  width: 20px;
+  height: auto !important;
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 8px;
-  border-radius: 15px;
-  font-size: 12px;
   color: #fff;
-  bottom: 80px;
-  right: 6px;
+  bottom: 10px;
+  right: 10px;
   transition: 0.3s ease-in;
 }
 
@@ -144,7 +162,11 @@ img {
   display: flex;
   flex-direction: column;
   justify-self: flex-end;
+  position: relative;
+  // z-index: 0;
 }
 .view {
+  position: unset !important;
+  background-color: transparent !important;
 }
 </style>

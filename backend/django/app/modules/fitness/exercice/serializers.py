@@ -28,11 +28,24 @@ class ExerciceSerializer(serializers.ModelSerializer):
 
         #hacemos un for por todas las categorias y las añadimos una a una a categories
         for category in categories:
-            exercice.categories.add(category)
-
-        
+            exercice.categories.add(category)  
         return exercice
 
+    def update(self, instance, validated_data):
+        print(instance)
+        #a categories añadimos las ID insertadas al realizar el POST
+        categories = validated_data.pop('categories_id')
+        author = self.context.get('author', None)
+        print(author.username)       
+
+        for (key, value) in validated_data.items():
+            setattr(instance, key, value)
+        instance.categories.set([]) #Elimanamos las categorias que tuviera anterioremente
+        #hacemos un for por todas las categorias y las añadimos una a una a categories
+        for category in categories:
+            instance.categories.add(category)
+        instance.save()
+        return instance
 
 
 

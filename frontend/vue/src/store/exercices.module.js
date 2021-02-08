@@ -6,6 +6,7 @@ const initialState = {
     description: "",
     image: "",
     categories: [],
+    categories_id: [],
   },
   exercices: [],
   exercicesCount: 0,
@@ -35,12 +36,13 @@ export const actions = {
     context.commit("set_exercice", data.exercice);
     return data;
   },
-  // [ARTICLE_PUBLISH]({ state }) {
-  //   return ArticlesService.create(state.article);
-  // },
-  // [ARTICLE_DELETE](context, slug) {
-  //   return ArticlesService.destroy(slug);
-  // },
+  exercice_publish({ state }) {
+    console.log(state.exercice);
+    return ExercicesService.create(state.exercice);
+  },
+  exercice_delete(context, slug) {
+    return ExercicesService.destroy(slug);
+  },
   // [ARTICLE_EDIT]({ state }) {
   //   return ArticlesService.update(state.article.slug, state.article);
   // },
@@ -50,9 +52,9 @@ export const actions = {
   // [ARTICLE_EDIT_REMOVE_TAG](context, tag) {
   //   context.commit(TAG_REMOVE, tag);
   // },
-  // [ARTICLE_RESET_STATE]({ commit }) {
-  //   commit(RESET_STATE);
-  // }
+  exercice_reset_sate({ commit }) {
+    commit("reset_sate");
+  },
 };
 
 /* eslint no-param-reassign: ["error", { "props": false }] */
@@ -68,20 +70,12 @@ export const mutations = {
     state.exercicesCount = data.count;
     state.isLoading = false;
   },
-  // [SET_COMMENTS](state, comments) {
-  //   state.comments = comments;
-  // },
-  // [TAG_ADD](state, tag) {
-  //   state.article.tagList = state.article.tagList.concat([tag]);
-  // },
-  // [TAG_REMOVE](state, tag) {
-  //   state.article.tagList = state.article.tagList.filter(t => t !== tag);
-  // },
-  // reset_state() {
-  //   for (let f in state) {
-  //     Vue.set(state, f, initialState[f]);
-  //   }
-  // }
+  reset_state() {
+    Object.assign(state, initialState);
+    // for (let f in state) {
+    //   Vue.set(state, f, initialState[f]);
+    // }
+  },
 };
 
 const getters = {
@@ -96,9 +90,6 @@ const getters = {
   },
   isLoading(state) {
     return state.isLoading;
-  },
-  tags(state) {
-    return state.tags;
   },
 };
 

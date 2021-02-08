@@ -73,10 +73,6 @@ export default {
     },
 
     pages() {
-      console.log(this.exercicesCount <= this.itemsPerPage);
-      console.log(this.isLoading);
-      console.log(this.exercicesCount);
-      console.log(this.itemsPerPage);
       if (this.isLoading || this.exercicesCount <= this.itemsPerPage) {
         return [];
       }
@@ -87,12 +83,12 @@ export default {
     ...mapGetters(["exercicesCount", "isLoading", "exercices", "currentUser"]),
   },
   watch: {
-    exercices: {
-      handler(exercices) {
-        console.log(exercices); //Debug
-      },
-      deep: true,
-    },
+    // exercices: {
+    //   handler(exercices) {
+    //     console.log(exercices); //Debug
+    //   },
+    //   deep: true,
+    // },
     currentPage(newValue) {
       this.listConfig.filters.offset = (newValue - 1) * this.itemsPerPage;
       this.fetchExercices();
@@ -108,7 +104,7 @@ export default {
   },
   methods: {
     fetchExercices() {
-      console.log(this.listConfig);
+      // console.log(this.listConfig);
       this.$store.dispatch("fetch_exercices", this.listConfig);
     },
     resetPagination() {

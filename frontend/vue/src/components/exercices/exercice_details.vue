@@ -3,7 +3,7 @@
     <div class="modal exercice-details">
       <i class="far fa-times-circle close-modal" @click.self="closeModal"></i>
       <div class="modal-left-side">
-        <img :src="exercice.image" alt="exercice img" />
+        <img :src="exercice.image" alt="exercice img" @error="imageDefault" />
       </div>
       <div class="modal-right-side">
         <h1>{{ exercice.name }}</h1>
@@ -28,6 +28,13 @@
         <div class="options">
           <button class="btn-add">Add to my list</button>
           <button class="btn-fav"><i class="far fa-heart"></i></button>
+          <button
+            class="btn-delete"
+            v-if="currentUser.username == exercice.author.username"
+            @click="deleteExercice"
+          >
+            <i class="far fa-trash-alt"></i>
+          </button>
         </div>
       </div>
     </div>
@@ -35,22 +42,41 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import store from "@/store";
+import { IMAGEN_EXERCICE } from "@/store/defaults.type";
 export default {
   name: "exerciceDetails",
 
+  computed: {
+    ...mapGetters(["currentUser"]),
+  },
+
   methods: {
+    deleteExercice() {
+      if (this.currentUser.username == this.exercice.author.username) {
+        store.dispatch("exercice_delete", this.exercice.slug).then(() => {
+          setTimeout(() => {
+            location.reload();
+          }, 1500);
+        });
+      }
+    },
     closeModal() {
-      this.$parent.showModal();
+      this.$parent.$parent.showModal();
+    },
+    imageDefault(e) {
+      e.target.src = IMAGEN_EXERCICE;
     },
   },
-  watch: {
-    exercice: {
-      handler(exercice) {
-        console.log(exercice); //Debug
-      },
-      deep: true,
-    },
-  },
+  // watch: {
+  //   exercice: {
+  //     handler(exercice) {
+  //       console.log(exercice); //Debug
+  //     },
+  //     deep: true,
+  //   },
+  // },
   props: ["state", "exercice"],
 };
 </script>
@@ -121,7 +147,7 @@ export default {
   transition: 100ms;
 }
 
-.modal-left-side img:hover{
+.modal-left-side img:hover {
   transform: scale(1.05);
 }
 
@@ -144,6 +170,14 @@ export default {
   color: #202020;
   font-size: 18px;
   margin-bottom: 10px;
+}
+
+.modal-right-side p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* number of lines to show */
+  -webkit-box-orient: vertical;
 }
 
 .options {
@@ -180,12 +214,31 @@ export default {
   color: rgb(255, 102, 102);
   font-family: "Oswald", sans-serif;
   font-size: 18px;
+  margin-right: 8px;
   cursor: pointer;
 }
 
 .btn-fav:hover {
   font-size: 20px;
   border: 3px solid rgb(255, 102, 102);
+}
+
+.btn-delete {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  background-color: transparent;
+  border: 2.5px solid rgb(170, 25, 25);
+  color: rgb(170, 25, 25);
+  font-family: "Oswald", sans-serif;
+  font-size: 18px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  font-size: 20px;
+  border: 3px solid rgb(170, 25, 25);
 }
 
 .categories-list {
@@ -207,20 +260,19 @@ export default {
     min-width: unset;
   }
 
-  .modal-left-side{
+  .modal-left-side {
     height: 40%;
     width: 100%;
     padding: 0px 20px;
-
   }
-  .modal-left-side img{
+  .modal-left-side img {
     position: unset;
     top: unset;
     left: unset;
-    
+
     height: 70%;
   }
-  .modal-right-side{
+  .modal-right-side {
     flex: 1;
     padding-top: 0;
   }

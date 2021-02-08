@@ -1,9 +1,13 @@
 <template>
   <div>
     <mainheader />
-    <!-- <transition name="router-anim" enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutDown"> -->
+    <transition
+      name="router-anim"
+      enter-active-class="animated fadeIn"
+      leave-active-class="animated fadeOut"
+    >
       <router-view />
-    <!-- </transition> -->
+    </transition>
   </div>
 </template>
 <script>
@@ -21,7 +25,7 @@ export default {
 
 <style>
 /* @import './App.css'; */
-/* @import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1"; */
+@import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
 
 @font-face {
   font-family: "PoppinsBold";
@@ -58,8 +62,24 @@ body {
   background-color: #111;
 }
 
-
 /* Page transition */
+
+.animated {
+  transition-duration: 100ms;
+}
+
+.fadeInDown {
+  transition-duration: 100ms;
+}
+
+.fadeOutDown {
+  transition-duration: 100ms;
+}
+
+.router-anim-enter-active,
+.router-anim-leave-active {
+  transition: all 100ms ease;
+}
 
 /* .fade-enter-active,
 .fade-leave-active {
@@ -70,6 +90,6 @@ body {
 
 .fade-enter,
 .fade-leave-active {
-  opacity: 0
+  opacity: 0;
 } */
 </style>

@@ -76,7 +76,12 @@
           </div>
           <div class="profile-menu">
             <div class="profile-avatar">
-              <img class="profile-img" :src="currentUser.image" alt="" />
+              <img
+                class="profile-img"
+                :src="currentUser.image"
+                alt=""
+                @error="imageDefault"
+              />
               <div class="profile-name">{{ currentUser.username }}</div>
             </div>
             <div class="menu-items">
@@ -111,8 +116,8 @@
         <div v-if="currentTab == 'update'">
           <UpdateProfile />
         </div>
-        <div class="load-more">
-          Load More
+        <div class="load-more" @click="logout">
+          LOGOUT
         </div>
       </div>
     </div>
@@ -123,6 +128,8 @@ import store from "@/store";
 import { mapGetters } from "vuex";
 import exercicesList from "@/components/exercices/exercices_list";
 import UpdateProfile from "@/components/profile/updateProfile";
+import { IMAGEN_PROFILE } from "@/store/defaults.type";
+
 export default {
   name: "Profile",
   data: function() {
@@ -140,6 +147,9 @@ export default {
     },
     tabChange(tab) {
       this.currentTab = tab;
+    },
+    imageDefault(e) {
+      e.target.src = IMAGEN_PROFILE;
     },
   },
   computed: {

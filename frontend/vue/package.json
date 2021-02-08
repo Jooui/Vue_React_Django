@@ -23,6 +23,7 @@
     "vue": "^3.0.5",
     "vue-axios": "^3.2.2",
     "vue-router": "^4.0.3",
+    "vue3-dropzone": "0.0.4",
     "vue3-tabs": "^0.1.9",
     "vuesax": "3.9.0",
     "vuex": "^4.0.0-rc.2"

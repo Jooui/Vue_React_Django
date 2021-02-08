@@ -73,7 +73,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-
+// document.documentElement.style.setProperty("--animate-duration", "100ms");
 export default {
   name: "mainheader",
   computed: {

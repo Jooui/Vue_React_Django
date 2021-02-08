@@ -8,7 +8,7 @@ class Exercice(models.Model):
     slug = models.SlugField(unique=True, null = True, blank = True)
     name = models.CharField(max_length=60)
     description = models.TextField()
-    image = models.CharField(max_length=255, null = True)
+    image = models.CharField(max_length=255, default='https://upload.wikimedia.org/wikipedia/commons/8/84/Musculation_exercice_abdominal.png',blank = True,null = True)
 
     author = models.ForeignKey('profiles.Profile', on_delete=models.CASCADE, related_name='exers')
     # categories = models.ManyToManyField(Category, blank=True)
@@ -25,7 +25,8 @@ class Exercice(models.Model):
  
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)+"-"+str(randint(1000,9999))
+        if not self.slug:
+            self.slug = slugify(self.name)+"-"+str(randint(1000,9999))
         super(Exercice, self).save(*args, **kwargs)
 
     def __str__(self):
