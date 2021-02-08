@@ -70,7 +70,6 @@ export default {
 }
 
 .modal {
-  /* overflow: hidden; */
   width: 50%;
   height: 50%;
   min-width: 700px;
@@ -78,6 +77,7 @@ export default {
   z-index: 10;
   border-radius: 20px;
   position: relative;
+  box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 34%);
 }
 
 .close-modal {
@@ -100,7 +100,6 @@ export default {
 }
 
 .modal-left-side {
-  /* background-color: rgb(238, 238, 238); */
   min-width: 260px;
   width: 30%;
   display: flex;
@@ -108,7 +107,6 @@ export default {
   justify-content: center;
   position: relative;
   overflow: unset;
-  /* flex: 1; */
 }
 
 .modal-left-side img {
@@ -119,12 +117,15 @@ export default {
   left: -30px;
   z-index: 20;
   border-radius: 15px;
-  /* width: 120%; */
+  box-shadow: 0px 0px 6px 0px rgb(0 0 0 / 34%);
+  transition: 100ms;
+}
+
+.modal-left-side img:hover{
+  transform: scale(1.05);
 }
 
 .modal-right-side {
-  /* background-color: lightcoral; */
-  /* flex: 2; */
   display: flex;
   flex-direction: column;
   padding: 30px;
@@ -166,7 +167,7 @@ export default {
 }
 
 .btn-add:hover {
-  /* background-color: red; */
+  font-weight: 500;
   border: 3px solid #66f;
 }
 
@@ -180,10 +181,10 @@ export default {
   font-family: "Oswald", sans-serif;
   font-size: 18px;
   cursor: pointer;
-  transition: 1s;
 }
 
 .btn-fav:hover {
+  font-size: 20px;
   border: 3px solid rgb(255, 102, 102);
 }
 
@@ -204,6 +205,32 @@ export default {
     width: 95%;
     height: 75%;
     min-width: unset;
+  }
+
+  .modal-left-side{
+    height: 40%;
+    width: 100%;
+    padding: 0px 20px;
+
+  }
+  .modal-left-side img{
+    position: unset;
+    top: unset;
+    left: unset;
+    
+    height: 70%;
+  }
+  .modal-right-side{
+    flex: 1;
+    padding-top: 0;
+  }
+
+  .modal-right-side p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 7; /* number of lines to show */
+    -webkit-box-orient: vertical;
   }
 }
 </style>

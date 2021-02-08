@@ -1,7 +1,9 @@
 <template>
   <div>
-    <mainheader/>
-    <router-view />
+    <mainheader />
+    <!-- <transition name="router-anim" enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutDown"> -->
+      <router-view />
+    <!-- </transition> -->
   </div>
 </template>
 <script>
@@ -19,6 +21,7 @@ export default {
 
 <style>
 /* @import './App.css'; */
+/* @import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1"; */
 
 @font-face {
   font-family: "PoppinsBold";
@@ -54,4 +57,19 @@ body {
 .nav a:hover {
   background-color: #111;
 }
+
+
+/* Page transition */
+
+/* .fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.3s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0
+} */
 </style>
