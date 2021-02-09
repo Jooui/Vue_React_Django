@@ -60,7 +60,12 @@
               <router-link v-if="!isAuthenticated" :to="{ name: 'Login' }"
                 >Login</router-link
               >
-              <router-link v-if="isAuthenticated" :to="{ name: 'Profile' }"
+              <router-link
+                v-if="isAuthenticated"
+                :to="{
+                  name: 'UsersProfile',
+                  params: { username: currentUser.username },
+                }"
                 >Profile</router-link
               >
             </a>

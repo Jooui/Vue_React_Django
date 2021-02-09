@@ -34,21 +34,6 @@
               </svg>
               1,702
             </div>
-            <!-- <div class="profile-item">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 469.33 469.33"
-              >
-                <path
-                  d="M234.67 170.67c-35.31 0-64 28.69-64 64s28.69 64 64 64 64-28.7 64-64-28.7-64-64-64z"
-                />
-                <path
-                  d="M234.67 74.67C128 74.67 36.9 141 0 234.67c36.9 93.65 128 160 234.67 160 106.77 0 197.76-66.35 234.66-160-36.9-93.66-127.89-160-234.66-160zm0 266.66c-58.88 0-106.67-47.78-106.67-106.66S175.79 128 234.67 128s106.66 47.79 106.66 106.67-47.78 106.66-106.66 106.66z"
-                />
-              </svg>
-              1,503
-            </div> -->
             <div class="profile-item">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -98,6 +83,7 @@
                 >Exercices</a
               >
               <a
+                v-if="owner"
                 class="profile-menu-link"
                 :class="[currentTab == 'update' ? 'active' : '']"
                 @click="tabChange('update')"
@@ -106,7 +92,9 @@
             </div>
             <div class="follow-buttons">
               <button class="follow">645,321</button>
-              <button class="follow follow-option">Follow</button>
+              <button v-if="!owner" class="follow follow-option">
+                Follow
+              </button>
             </div>
           </div>
         </div>
@@ -116,7 +104,9 @@
         <div v-if="currentTab == 'update'">
           <UpdateProfile />
         </div>
-        <div class="load-more" @click="logout">LOGOUT</div>
+        <div class="load-more" @click="logout" v-if="owner">
+          LOGOUT
+        </div>
       </div>
     </div>
   </div>
@@ -132,8 +122,9 @@ export default {
   name: "Profile",
   data: function() {
     return {
+      owner: false,
       currentTab: "exercices",
-    }
+    };
   },
   components: {
     exercicesList,
@@ -149,12 +140,11 @@ export default {
     imageDefault(e) {
       e.target.src = IMAGEN_PROFILE;
     },
-    async getProfile() {
-      store.dispatch("fetch_profile",this.$route.params.username).then(()=>{console.log(this.profile)})
-    },
-    async setCurrentUser(){
-      Object.assign(this.profile, store.getters.currentUser);
-    }
+  },
+
+  mounted() {
+    this.owner =
+      this.currentUser.username == this.profile.username ? true : false;
   },
 
   computed: {
@@ -163,42 +153,16 @@ export default {
       "isAuthenticated",
       "errors",
       "exercicesCount",
-      "profile"
+      "profile",
     ]),
   },
-  // beforeRouteEnter(to, from, next){
-  //   console.log(next);
-  //   console.log(from);
-  //   if(to.name == "UsersProfile"){
-  //     store.dispatch("fetch_profile",to.params.username)
-  //     next()
-  //   }else{
-  //     console.log(store.getters.currentUser);
-  //     // let pepe: {
-  //     //       ...mapGetters([
-  //     //       "currentUser",
-  //     //       "isAuthenticated",
-  //     //       "errors",
-  //     //       "exercicesCount",
-  //     //       "profile"])
-  //     // }
-  //     // store.dispatch("my_profile")
-  //     // console.log(this.currentUser);
-  //     // store.dispatch("fetch_profile",store.getters.currentUser.username)
-  //     // Object.assign(this.profile, store.getters.currentUser);
-  //     next()
-  //   }
-  // },
-  mounted(){
-    console.log(this.currentUser);
-    if(this.$route.params.username){
-      store.dispatch("fetch_profile",this.$route.params.username)
-    }else{
-      store.dispatch("fetch_profile",this.currentUser.username)
+  beforeRouteEnter(to, _, next) {
+    if (to.params.username) {
+      store.dispatch("fetch_profile", to.params.username).then(() => {
+        next();
+      });
     }
-    
-    console.log(this.profile);
-  }
+  },
 };
 </script>
 <style lang="scss">

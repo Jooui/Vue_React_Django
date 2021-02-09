@@ -9,7 +9,6 @@ import ExerciceUpload from "@/views/ExerciceUpload.vue";
 import NotFound from "@/views/NotFound.vue";
 import authGuard from "@/common/AuthGuard";
 
-
 const routes = [
   {
     path: "/",
@@ -26,19 +25,19 @@ const routes = [
     path: "/register",
     name: "Register",
     component: Register,
-    // beforeEnter: authGuard 
+    // beforeEnter: authGuard
   },
   {
     path: "/about",
     name: "About",
     component: About,
-    beforeEnter: authGuard
+    beforeEnter: authGuard,
   },
   {
     path: "/profile",
     name: "Profile",
     component: Profile,
-    beforeEnter: authGuard
+    beforeEnter: authGuard,
   },
   {
     path: "/@:username",
@@ -49,7 +48,7 @@ const routes = [
     path: "/exercices/upload",
     name: "ExerciceUpload",
     component: ExerciceUpload,
-    beforeEnter: authGuard
+    beforeEnter: authGuard,
   },
   {
     path: "/:catchAll(.*)",
