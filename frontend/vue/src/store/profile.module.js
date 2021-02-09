@@ -20,11 +20,12 @@ export const actions = {
         throw new Error(error);
       });
   },
-  fetch_profile(context, payload) {
-    const { username } = payload;
+  async fetch_profile(context, payload) {
     console.log("FETCH PROFILE");
-    console.log(username);
-    return ProfileService.get(username)
+    console.log(payload);
+    // const { username } = payload;
+    // console.log(username);
+    return ProfileService.get(payload)
       .then(({ data }) => {
         context.commit("set_profile", data.profile);
         return data;

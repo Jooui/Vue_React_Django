@@ -78,11 +78,11 @@
             <div class="profile-avatar">
               <img
                 class="profile-img"
-                :src="currentUser.image"
+                :src="profile.image"
                 alt=""
                 @error="imageDefault"
               />
-              <div class="profile-name">{{ currentUser.username }}</div>
+              <div class="profile-name">{{ profile.username }}</div>
             </div>
             <div class="menu-items">
               <a
@@ -111,14 +111,12 @@
           </div>
         </div>
         <div v-if="currentTab == 'exercices'">
-          <exercices-list :author="currentUser.username" :items-per-page="5" />
+          <exercices-list :author="profile.username" :items-per-page="5" />
         </div>
         <div v-if="currentTab == 'update'">
           <UpdateProfile />
         </div>
-        <div class="load-more" @click="logout">
-          LOGOUT
-        </div>
+        <div class="load-more" @click="logout">LOGOUT</div>
       </div>
     </div>
   </div>
@@ -135,7 +133,7 @@ export default {
   data: function() {
     return {
       currentTab: "exercices",
-    };
+    }
   },
   components: {
     exercicesList,
@@ -146,13 +144,19 @@ export default {
       store.dispatch("logout").then(() => this.$router.push({ name: "Home" }));
     },
     tabChange(tab) {
-      
       this.currentTab = tab;
     },
     imageDefault(e) {
       e.target.src = IMAGEN_PROFILE;
     },
+    async getProfile() {
+      store.dispatch("fetch_profile",this.$route.params.username).then(()=>{console.log(this.profile)})
+    },
+    async setCurrentUser(){
+      Object.assign(this.profile, store.getters.currentUser);
+    }
   },
+
   computed: {
     ...mapGetters([
       "currentUser",
@@ -162,11 +166,38 @@ export default {
       "profile"
     ]),
   },
-  beforeMount(){
-    console.log(this.$route.params.username);
-    store.dispatch("fetch_profile",this.$route.params.username).then(()=>{console.log(this.profile)})
+  // beforeRouteEnter(to, from, next){
+  //   console.log(next);
+  //   console.log(from);
+  //   if(to.name == "UsersProfile"){
+  //     store.dispatch("fetch_profile",to.params.username)
+  //     next()
+  //   }else{
+  //     console.log(store.getters.currentUser);
+  //     // let pepe: {
+  //     //       ...mapGetters([
+  //     //       "currentUser",
+  //     //       "isAuthenticated",
+  //     //       "errors",
+  //     //       "exercicesCount",
+  //     //       "profile"])
+  //     // }
+  //     // store.dispatch("my_profile")
+  //     // console.log(this.currentUser);
+  //     // store.dispatch("fetch_profile",store.getters.currentUser.username)
+  //     // Object.assign(this.profile, store.getters.currentUser);
+  //     next()
+  //   }
+  // },
+  mounted(){
+    console.log(this.currentUser);
+    if(this.$route.params.username){
+      store.dispatch("fetch_profile",this.$route.params.username)
+    }else{
+      store.dispatch("fetch_profile",this.currentUser.username)
+    }
     
-
+    console.log(this.profile);
   }
 };
 </script>
