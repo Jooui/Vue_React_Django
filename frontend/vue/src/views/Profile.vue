@@ -92,8 +92,12 @@
             </div>
             <div class="follow-buttons">
               <button class="follow">645,321</button>
-              <button v-if="!owner" class="follow follow-option">
-                Follow
+              <button
+                v-if="!owner"
+                class="follow follow-option"
+                @click="doFollow()"
+              >
+                {{ profile.following ? "UNFOLLOW" : "FOLLOW" }}
               </button>
             </div>
           </div>
@@ -104,9 +108,7 @@
         <div v-if="currentTab == 'update'">
           <UpdateProfile />
         </div>
-        <div class="load-more" @click="logout" v-if="owner">
-          LOGOUT
-        </div>
+        <div class="load-more" @click="logout" v-if="owner">LOGOUT</div>
       </div>
     </div>
   </div>
@@ -139,6 +141,13 @@ export default {
     },
     imageDefault(e) {
       e.target.src = IMAGEN_PROFILE;
+    },
+    doFollow() {
+      if (!this.profile.following) {
+        store.dispatch("follow_profile", this.profile.username);
+      } else {
+        store.dispatch("unfollow_profile", this.profile.username);
+      }
     },
   },
 
