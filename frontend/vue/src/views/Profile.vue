@@ -172,6 +172,10 @@ export default {
       });
     }
   },
+  async beforeRouteLeave(to, from, next) {
+    await store.dispatch("profile_reset_state");
+    next();
+  },
 };
 </script>
 <style lang="scss">

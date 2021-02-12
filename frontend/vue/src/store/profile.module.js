@@ -35,6 +35,9 @@ export const actions = {
       return data;
     });
   },
+  profile_reset_state({ commit }) {
+    commit("reset_sate");
+  },
 };
 
 /* eslint no-param-reassign: ["error", { "props": false }] */
@@ -48,6 +51,9 @@ export const mutations = {
   set_profile(state, profile) {
     state.profile = profile;
     state.errors = {};
+  },
+  reset_state() {
+    Object.assign(state, initialState);
   },
 };
 
