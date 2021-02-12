@@ -28,7 +28,6 @@ export const actions = {
       });
   },
   async fetch_exercice(context, exerciceSlug, prevExercice) {
-    // avoid extronuous network call if article exists
     if (prevExercice !== undefined) {
       return context.commit("set_exercice", prevExercice);
     }
@@ -43,17 +42,23 @@ export const actions = {
   exercice_delete(context, slug) {
     return ExercicesService.destroy(slug);
   },
-  // [ARTICLE_EDIT]({ state }) {
-  //   return ArticlesService.update(state.article.slug, state.article);
-  // },
-  // [ARTICLE_EDIT_ADD_TAG](context, tag) {
-  //   context.commit(TAG_ADD, tag);
-  // },
-  // [ARTICLE_EDIT_REMOVE_TAG](context, tag) {
-  //   context.commit(TAG_REMOVE, tag);
-  // },
   exercice_reset_sate({ commit }) {
     commit("reset_sate");
+  },
+
+  //Favorite exercices
+
+  favorite_exercice(context, payload) {
+    return ExercicesService.favorite(payload).then(({ data }) => {
+      context.commit("set_exercice", data.exercice);
+      return data;
+    });
+  },
+  unfavorite_exercice(context, payload) {
+    return ExercicesService.unfavorite(payload).then(({ data }) => {
+      context.commit("set_exercice", data.exercice);
+      return data;
+    });
   },
 };
 
@@ -72,9 +77,6 @@ export const mutations = {
   },
   reset_state() {
     Object.assign(state, initialState);
-    // for (let f in state) {
-    //   Vue.set(state, f, initialState[f]);
-    // }
   },
 };
 

@@ -20,6 +20,12 @@ const ExercicesService = {
   destroy(slug) {
     return ApiService.delete(`fitness/exercice/${slug}`);
   },
+  favorite(slug) {
+    return ApiService.post(`fitness/exercice/${slug}/favorite`);
+  },
+  unfavorite(slug) {
+    return ApiService.delete(`fitness/exercice/${slug}/favorite`);
+  },
 };
 
 export default ExercicesService;

@@ -27,7 +27,9 @@
         </p>
         <div class="options">
           <button class="btn-add">Add to my list</button>
-          <button class="btn-fav"><i class="far fa-heart"></i></button>
+          <button class="btn-fav" @click="favExercice">
+            <i class="far fa-heart"></i>
+          </button>
           <button
             class="btn-delete"
             v-if="currentUser.username == exercice.author.username"
@@ -60,6 +62,21 @@ export default {
             location.reload();
           }, 1500);
         });
+      }
+    },
+
+    // Faltaria isloading y change css
+    favExercice() {
+      if (this.exercice.favorited) {
+        store.dispatch("favorite_exercice", this.exercice.slug).then((data) => {
+          console.log(data);
+        });
+      } else {
+        store
+          .dispatch("unfavorite_exercice", this.exercice.slug)
+          .then((data) => {
+            console.log(data);
+          });
       }
     },
     closeModal() {
