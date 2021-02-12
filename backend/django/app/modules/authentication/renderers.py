@@ -1,7 +1,7 @@
-from app.modules.core.renderers import ConduitJSONRenderer
+from app.modules.core.renderers import ApiJSONRenderer
 
 
-class UserJSONRenderer(ConduitJSONRenderer):
+class UserJSONRenderer(ApiJSONRenderer):
     charset = 'utf-8'
     object_label = 'user'
     pagination_object_label = 'users'
