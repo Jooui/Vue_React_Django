@@ -1,0 +1,14 @@
+{
+  "appId": "com.revand.app",
+  "appName": "revand",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "linuxAndroidStudioPath": "/snap/bin/android-studio",
+  "cordova": {}
+}

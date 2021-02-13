@@ -27,7 +27,7 @@
         </p>
         <div class="options">
           <button class="btn-add">Add to my list</button>
-          <button class="btn-fav" @click="favExercice">
+          <button class="btn-fav" :class="this.exercice.favorited ? 'favorited':''" @click="favExercice">
             <i class="far fa-heart"></i>
           </button>
           <button
@@ -67,11 +67,16 @@ export default {
 
     // Faltaria isloading y change css
     favExercice() {
-      if (this.exercice.favorited) {
+      if (!this.exercice.favorited) {
+        console.log("fav exerciiice");
         store.dispatch("favorite_exercice", this.exercice.slug).then((data) => {
+          console.log("NEW DATA");
           console.log(data);
+          console.log("OLD DATA");
+          console.log(this.exercice);
         });
       } else {
+        console.log("unfavorite");
         store
           .dispatch("unfavorite_exercice", this.exercice.slug)
           .then((data) => {
@@ -238,6 +243,11 @@ export default {
 .btn-fav:hover {
   font-size: 20px;
   border: 3px solid rgb(255, 102, 102);
+}
+
+.favorited{
+  color: white;
+  background-color: rgb(255, 102, 102);
 }
 
 .btn-delete {

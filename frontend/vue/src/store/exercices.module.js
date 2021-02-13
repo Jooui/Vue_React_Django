@@ -49,6 +49,8 @@ export const actions = {
   //Favorite exercices
 
   favorite_exercice(context, payload) {
+    console.log("favorite_exercice============");
+    console.log(payload);
     return ExercicesService.favorite(payload).then(({ data }) => {
       context.commit("set_exercice", data.exercice);
       return data;
