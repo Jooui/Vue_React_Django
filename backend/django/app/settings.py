@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'app.modules.articles',
     'app.modules.fitness.category',
     'app.modules.fitness.exercice',
-    # 'app.modules.training',
+    'app.modules.fitness.training',
     'app.modules.authentication',
     'app.modules.core',
     'app.modules.profiles',
