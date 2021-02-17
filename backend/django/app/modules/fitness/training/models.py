@@ -3,6 +3,8 @@ from django.template.defaultfilters import slugify
 from app.modules.fitness.exercice.models import Exercice
 from random import randint
 
+
+
 class Training(models.Model):
     slug = models.SlugField(unique=True, null = True, blank = True)
     name = models.CharField(max_length=60)
@@ -10,7 +12,7 @@ class Training(models.Model):
     image = models.CharField(max_length=255, default='https://upload.wikimedia.org/wikipedia/commons/8/84/Musculation_exercice_abdominal.png',blank = True,null = True)
     verified = models.BooleanField(default=False)
     author = models.ForeignKey('profiles.Profile', on_delete=models.CASCADE, related_name='trainings')
-    exercices = models.ManyToManyField(Exercice, blank=True)
+    exercices = models.ManyToManyField(Exercice, through='Difficulty')
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -20,5 +22,9 @@ class Training(models.Model):
     def __str__(self):
         return self.name
 
-
-
+class Difficulty(models.Model):
+    training = models.ForeignKey(Training, on_delete=models.CASCADE)
+    exercice = models.ForeignKey(Exercice, on_delete=models.CASCADE)
+    duration = models.CharField(max_length=60)
+    repetitions = models.CharField(max_length=60)
+    sets = models.CharField(max_length=60)
