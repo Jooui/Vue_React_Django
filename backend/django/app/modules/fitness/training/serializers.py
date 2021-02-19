@@ -9,7 +9,16 @@ from .models import Training
 # //https://stackoverflow.com/questions/51759020/nested-serializer-through-model-in-django-rest-framework
 # https://github.com/encode/django-rest-framework/issues/5403
 class DifficultySerializer(serializers.ModelSerializer):
-    # exercice = serializers.PrimaryKeyRelatedField(queryset=Exercice.objects.all(), write_only=True)
+    # print(self)
+    exercice = serializers.PrimaryKeyRelatedField(queryset=Exercice.objects.all(), write_only=True)
+    # exercice = serializers.SerializerMethodField()
+    # exercice_id = serializers.PrimaryKeyRelatedField(queryset=Exercice.objects.all(), write_only=True)
+    # exercice =serializers.PrimaryKeyRelatedField(queryset=Exercice.objects.all())
+    def get_exercice(self, obj):
+        print(self)
+        serializer = ExerciceSerializer(obj.exercice)
+        print(serializer)
+        return serializer.data  
     # # # training = serializers.PrimaryKeyRelatedField(read_only=True)
     # # # exercice = ExerciceSerializer()
 
@@ -17,9 +26,9 @@ class DifficultySerializer(serializers.ModelSerializer):
     # # # exercice = ExerciceSerializer(read_only=True)
     
     # # # exercice = serializers.CharField(required=False)
-    # sets = serializers.CharField(required=False)
-    # duration = serializers.CharField(required=False)
-    # repetitions = serializers.CharField(required=False)
+    sets = serializers.CharField(required=False)
+    duration = serializers.CharField(required=False)
+    repetitions = serializers.CharField(required=False)
     class Meta:
         model = Difficulty
         fields = (
@@ -29,6 +38,7 @@ class DifficultySerializer(serializers.ModelSerializer):
             "repetitions",
             # "exercice_id"
         )
+        depth = 1
 
     # def create(self, validated_data):
     #     print("wdadawdadwdwdawdadawawdawdwdawdadwa")
@@ -46,6 +56,22 @@ class DifficultySerializer(serializers.ModelSerializer):
 class TrainingSerializer(serializers.ModelSerializer):
     
     difficulties = DifficultySerializer(many=True)
+    # exercices = serializers.ListField(read_only=True)
+
+    exercices = serializers.SerializerMethodField()
+
+    def get_exercices(self,obj):
+        print("LELELELELELELELELELELELELELELELE")
+        # serializer = DifficultySerializer(obj.difficulties)
+        # a = self
+        a = self.__dict__
+        print(a.get('_kwargs').get('data').get('difficulties'))
+        print("=======================================")
+        print(obj)
+        # print(self.instance.difficulties.steps)
+        # print(obj.difficulties.exercice)
+        return a.get('_kwargs').get('data').get('difficulties')
+
     #declaramos tambien exercices_id para al realizar el insert pongamos solo las ID (write only)
     # exercices_id = serializers.PrimaryKeyRelatedField(queryset=Exercice.objects.all(), write_only=True,many=True)
     # difs = DifficultySerializer(many=True, read_only=True)
@@ -60,7 +86,7 @@ class TrainingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Training
-        fields = ['id', 'name', 'slug','image','description','verified','author','difficulties']
+        fields = ['id', 'name', 'slug','image','description','verified','author','difficulties','exercices']
     def create(self, validated_data):
         difficulties_data = validated_data.pop('difficulties')
 
@@ -74,12 +100,27 @@ class TrainingSerializer(serializers.ModelSerializer):
         # print(exercices_list)
         # training.exercices.set(exercices_list)
         # training.save()
-
+            
+        dif_list = []
         for dif_data in difficulties_data:
             print("EXERCICE")
             print()
-            # print(exercice_data)
+            # print(dif_data)
             Difficulty.objects.create(**dif_data,training=training)
+
+            # dif_list.append(ex_c)
+        
+        # exercices = "holaholahola"
+        # ex_c.exercice.all()
+        # training.exercices.append(**dif_list)
+        # print(dif_list)
+        # training.difficulties_set.all()
+
+        # for dif in difficulties_data:
+            
+        #     # Exercice.objects.get(="Cheddar Talk")
+        #     print(b)
+
         return training
             # Group.objects.create(member=member, **group)
             # for memberhip in memberships:

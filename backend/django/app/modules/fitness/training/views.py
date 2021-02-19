@@ -23,9 +23,19 @@ class TrainingViewSet(viewsets.ModelViewSet):
         }
         serializer_data = request.data.get('training', {})
 
+        # difficulties=serializer_data.get('difficulties')
+        # lisst = []
+
+        # for x in difficulties:
+
+
+        # pepe = DifficultySerializer(difficulties[0])
+
+        # print(pepe)    
+        
         serializer = self.serializer_class(
-        data=serializer_data, context=serializer_context
-        )
+        data=serializer_data, context=serializer_context)
+        # print(serializer_data.get('difficulties'))
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
@@ -34,3 +44,5 @@ class TrainingViewSet(viewsets.ModelViewSet):
 class DifficultyViewSet(viewsets.ModelViewSet):
     queryset = Difficulty.objects.all()
     serializer_class = DifficultySerializer
+    # serializer_data = request.data.get('training', {})
+    # print(serializer_data.get('difficulties'))
