@@ -10,15 +10,23 @@ from .models import Training
 # https://github.com/encode/django-rest-framework/issues/5403
 class DifficultySerializer(serializers.ModelSerializer):
     # print(self)
-    exercice = serializers.PrimaryKeyRelatedField(queryset=Exercice.objects.all(), write_only=True)
+    exercice = serializers.PrimaryKeyRelatedField(queryset=Exercice.objects.all())
     # exercice = serializers.SerializerMethodField()
     # exercice_id = serializers.PrimaryKeyRelatedField(queryset=Exercice.objects.all(), write_only=True)
     # exercice =serializers.PrimaryKeyRelatedField(queryset=Exercice.objects.all())
-    def get_exercice(self, obj):
-        print(self)
-        serializer = ExerciceSerializer(obj.exercice)
-        print(serializer)
-        return serializer.data  
+    # is_my_object = serializers.SerializerMethodField('_is_my_find')
+    # def _is_my_find(self):
+    #     print(self)
+    # #   queryset = Category.objects.filter(pk=self.kwargs['id'])
+    #     return "queryset"
+
+    # def _init_(self, obj):
+    #     print("wdawdawdadadwadad")
+    #     print(self)
+    #     # serializer = ExerciceSerializer(obj.exercice)
+    #     # print(serializer)
+    #     return "test"
+
     # # # training = serializers.PrimaryKeyRelatedField(read_only=True)
     # # # exercice = ExerciceSerializer()
 
@@ -55,22 +63,45 @@ class DifficultySerializer(serializers.ModelSerializer):
 
 class TrainingSerializer(serializers.ModelSerializer):
     
-    difficulties = DifficultySerializer(many=True)
+    difficulties = DifficultySerializer(many=True, write_only=True)
     # exercices = serializers.ListField(read_only=True)
 
     exercices = serializers.SerializerMethodField()
 
     def get_exercices(self,obj):
         print("LELELELELELELELELELELELELELELELE")
-        # serializer = DifficultySerializer(obj.difficulties)
-        # a = self
-        a = self.__dict__
-        print(a.get('_kwargs').get('data').get('difficulties'))
-        print("=======================================")
-        print(obj)
-        # print(self.instance.difficulties.steps)
-        # print(obj.difficulties.exercice)
-        return a.get('_kwargs').get('data').get('difficulties')
+        data = self.__dict__.get('_kwargs').get('data').get('difficulties')
+        # print(data)
+        # SOLO MUESTRA EL ID DEL EJERCICIO
+        return data
+        # list_exer = list()
+        # for value, dset in zip(entry[1:], data[entry[0]]):
+        # #     list_exer.add(value)
+        # for diff in data:
+            # exer = Exercice.objects.get(id=diff.get('exercice'))
+        #     # exer =Difficulty.objects.bulk_create(diff.get('exercice'))
+        #     list_exer.append(exer)
+        #     # print(exer)
+        
+        # print(list_exer)
+        # json_data = json.dumps(list_exer)
+        # objects = []
+        # for month, sales, expenses in zip(*my_list):
+        #     objects.append(MyModel(
+        #         month=month,
+        #         sales=sales,
+        #         expenses=expenses
+        #     ))
+        # MyModel.objects.bulk_create(objects)
+        
+        # exers = Comment.objects.filter(track__in=obj.tracks.all())
+        # return CommentSerializer(comments, many=True).data
+        # data.set(list_exer)
+        
+        
+
+
+        # return DifficultySerializer(data, many=True).data
 
     #declaramos tambien exercices_id para al realizar el insert pongamos solo las ID (write only)
     # exercices_id = serializers.PrimaryKeyRelatedField(queryset=Exercice.objects.all(), write_only=True,many=True)
@@ -104,7 +135,6 @@ class TrainingSerializer(serializers.ModelSerializer):
         dif_list = []
         for dif_data in difficulties_data:
             print("EXERCICE")
-            print()
             # print(dif_data)
             Difficulty.objects.create(**dif_data,training=training)
 
