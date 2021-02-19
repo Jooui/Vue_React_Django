@@ -12,7 +12,8 @@ class Training(models.Model):
     image = models.CharField(max_length=255, default='https://upload.wikimedia.org/wikipedia/commons/8/84/Musculation_exercice_abdominal.png',blank = True,null = True)
     verified = models.BooleanField(default=False)
     author = models.ForeignKey('profiles.Profile', on_delete=models.CASCADE, related_name='trainings')
-    exercices = models.ManyToManyField(Exercice, through='Difficulty')
+    # exercices = models.ManyToManyField(Exercice, through='Difficulty')
+    difficulties = models.ManyToManyField(Exercice, through='Difficulty', related_name='difficulties',related_query_name='difficulties')
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -23,8 +24,8 @@ class Training(models.Model):
         return self.name
 
 class Difficulty(models.Model):
-    training = models.ForeignKey(Training, on_delete=models.CASCADE)
-    exercice = models.ForeignKey(Exercice, on_delete=models.CASCADE)
+    training = models.ForeignKey(Training, on_delete=models.CASCADE, related_name='trainings',related_query_name='trainings')
+    exercice = models.ForeignKey(Exercice, on_delete=models.CASCADE, related_name='exercicies',related_query_name='exercicies')
     duration = models.CharField(max_length=60)
     repetitions = models.CharField(max_length=60)
     sets = models.CharField(max_length=60)
