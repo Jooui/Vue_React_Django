@@ -29,3 +29,4 @@ class Difficulty(models.Model):
     duration = models.CharField(max_length=60)
     repetitions = models.CharField(max_length=60)
     sets = models.CharField(max_length=60)
+    

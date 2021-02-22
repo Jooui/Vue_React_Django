@@ -21,6 +21,28 @@
               class="dropdown-toggler dropdown-title"
               data-dropdown="my-dropdown-id"
             >
+              Trainings <i class="fa fa-angle-down"></i>
+            </div>
+            <ul class="dropdown" id="my-dropdown-id">
+              <li>
+                <router-link :to="{ name: 'ExerciceUpload' }"
+                  >Create Training</router-link
+                >
+              </li>
+              <li class="separator"></li>
+              <li><a href="#">Popular Trainings</a></li>
+              <li class="separator"></li>
+              <li><a href="#">Latest Trainings</a></li>
+              <li class="separator"></li>
+              <li><a href="#">Official Trainings</a></li>
+            </ul>
+          </li>
+          <li class="navbar-dropdown">
+            <div
+              href="#"
+              class="dropdown-toggler dropdown-title"
+              data-dropdown="my-dropdown-id"
+            >
               Exercices <i class="fa fa-angle-down"></i>
             </div>
             <ul class="dropdown" id="my-dropdown-id">

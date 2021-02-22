@@ -6,6 +6,9 @@ from app.modules.fitness.training.models import Difficulty
 import json
 
 from .models import Training
+#https://bitbucket.org/snippets/adautoserpa/MeLa/django-rest-framework-manytomany-through
+
+
 # //https://stackoverflow.com/questions/51759020/nested-serializer-through-model-in-django-rest-framework
 # https://github.com/encode/django-rest-framework/issues/5403
 class DifficultySerializer(serializers.ModelSerializer):
@@ -70,9 +73,12 @@ class TrainingSerializer(serializers.ModelSerializer):
 
     def get_exercices(self,obj):
         print("LELELELELELELELELELELELELELELELE")
+        print(self)
+        print(obj)
+        ##SOLO FUNCIONA EN POST# SOLO MUESTRA EL ID DEL EJERCICIO
         data = self.__dict__.get('_kwargs').get('data').get('difficulties')
-        # print(data)
-        # SOLO MUESTRA EL ID DEL EJERCICIO
+        print(data)
+        
         return data
         # list_exer = list()
         # for value, dset in zip(entry[1:], data[entry[0]]):

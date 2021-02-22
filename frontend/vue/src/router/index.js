@@ -5,6 +5,8 @@ import Register from "@/views/Register.vue";
 import About from "@/views/About.vue";
 import Profile from "@/views/Profile.vue";
 import ExerciceUpload from "@/views/ExerciceUpload.vue";
+import Trainings from "@/views/Trainings.vue";
+
 
 import NotFound from "@/views/NotFound.vue";
 import authGuard from "@/common/AuthGuard";
@@ -53,6 +55,11 @@ const routes = [
   {
     path: "/:catchAll(.*)",
     component: NotFound,
+  },
+  {
+    path: "/trainings",
+    name: "Trainings",
+    component: Trainings,
   },
 ];
 

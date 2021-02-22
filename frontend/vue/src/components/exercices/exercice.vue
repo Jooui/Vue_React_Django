@@ -38,7 +38,7 @@
 import { mapGetters } from "vuex";
 import flexiones from "@/assets/img/exercices/flexiones.jpg";
 import exerciceDetails from "@/components/exercices/exercice_details";
-import { IMAGEN_EXERCICE } from "@/store/defaults.type";
+import { DEFAULT_IMAGE_EXERCICE } from "@/store/defaults.type";
 
 export default {
   name: "exercice",
@@ -73,7 +73,7 @@ export default {
       this.isModalVisible = this.isModalVisible == true ? false : true;
     },
     imageDefault(e) {
-      e.target.src = IMAGEN_EXERCICE;
+      e.target.src = DEFAULT_IMAGE_EXERCICE;
     },
   },
 };

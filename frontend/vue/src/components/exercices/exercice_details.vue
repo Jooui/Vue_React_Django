@@ -46,7 +46,7 @@
 <script>
 import { mapGetters } from "vuex";
 import store from "@/store";
-import { IMAGEN_EXERCICE } from "@/store/defaults.type";
+import { DEFAULT_IMAGE_EXERCICE } from "@/store/defaults.type";
 export default {
   name: "exerciceDetails",
 
@@ -88,7 +88,7 @@ export default {
       this.$parent.showModal();
     },
     imageDefault(e) {
-      e.target.src = IMAGEN_EXERCICE;
+      e.target.src = DEFAULT_IMAGE_EXERCICE;
     },
   },
   // watch: {
