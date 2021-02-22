@@ -24,9 +24,12 @@ class Training(models.Model):
         return self.name
 
 class Difficulty(models.Model):
-    training = models.ForeignKey(Training, on_delete=models.CASCADE, related_name='trainings',related_query_name='trainings')
-    exercice = models.ForeignKey(Exercice, on_delete=models.CASCADE, related_name='exercices',related_query_name='exercices')
+    training = models.ForeignKey(Training, on_delete=models.CASCADE, related_name='exercices_t',related_query_name='exercices_t')
+    exercice = models.ForeignKey(Exercice, on_delete=models.CASCADE)
     duration = models.CharField(max_length=60)
     repetitions = models.CharField(max_length=60)
     sets = models.CharField(max_length=60)
+    ex_id = models.CharField(max_length=60)
+    def __str__(self):
+        return self.sets
     
