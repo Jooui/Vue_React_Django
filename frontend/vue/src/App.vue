@@ -1,24 +1,26 @@
 <template>
   <div>
-    <mainheader />
-    <transition
-      name="router-anim"
-      enter-active-class="animated fadeIn"
-      leave-active-class="animated fadeOut"
-    >
-      <router-view />
-    </transition>
+    <!-- <suspense> -->
+      <MainHeader />
+      <transition
+        name="router-anim"
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut"
+      >
+        <router-view />
+      </transition>
+    <!-- </suspense> -->
   </div>
 </template>
 <script>
-import mainheader from "@/components/layout/newheader";
+import MainHeader from "@/components/layout/header";
 import "./App.css";
 // import Headersax from "@/components/layout/headersax";
 
 export default {
   name: "App",
   components: {
-    mainheader,
+    MainHeader,
   },
 };
 </script>

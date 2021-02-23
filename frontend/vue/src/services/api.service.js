@@ -25,7 +25,8 @@ const ApiService = {
   },
 
   post(resource, params) {
-    console.log(params);
+    console.log( params);
+    // JSON.parse(params)
     return http.post(`${resource}`, params)
     // return Vue.axios.post(`${resource}`, params);
   },

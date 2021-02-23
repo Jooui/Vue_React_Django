@@ -1,10 +1,12 @@
 <template>
   <div class="trainings-list-canvas">
-    <TrainingPreview
-      v-for="(training, index) in trainings"
-      v-bind:key="index"
-      :training="training"
-    />
+    <keep-alive>
+      <TrainingPreview
+        v-for="(training, index) in trainings"
+        v-bind:key="index"
+        :training="training"
+      />
+    </keep-alive>
     <VPagination :pages="pages" :currentPage="currentPage" />
     </div>
 </template>
@@ -13,6 +15,7 @@
 import { mapGetters } from "vuex";
 import TrainingPreview from "./TrainingPreview";
 import VPagination from "../layout/VPagination";
+// import { defineAsyncComponent } from 'vue';
 
 export default {
   name: "TrainingsList",

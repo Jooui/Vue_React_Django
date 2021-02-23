@@ -2,6 +2,7 @@
   <div class="training-preview-container" @click="$router.push('/trainings/'+training.slug)">
     <div class="training-preview-left">
       <img :src="training.image != '' ? training.image : training.difficulties[0].exercice.image" alt="">
+      <!-- <DefaultImage/> -->
     </div>
     <div class="training-preview-right">
       <h1>Entrenamiento en casa 7 minutos</h1>
@@ -23,9 +24,14 @@
 
 <script>
 import { mapGetters } from "vuex";
+// import { defineAsyncComponent } from 'vue'
+// import { DEFAULT_IMAGE_EXERCICE } from "@/store/defaults.type";
 import flexiones from "@/assets/img/exercices/flexiones.jpg";
-// import exerciceDetails from "@/components/exercices/exercice_details";
-import { DEFAULT_IMAGE_EXERCICE } from "@/store/defaults.type";
+
+// const DefaultImage = defineAsyncComponent(() =>
+  
+//   import('@/store/defaults.type')
+// )
 
 export default {
   name: "TrainingPreview",
@@ -42,6 +48,7 @@ export default {
     },
   },
   components: {
+    // DefaultImage
     // exerciceDetails,
   },
   data() {
@@ -55,9 +62,9 @@ export default {
     showModal() {
       this.isModalVisible = this.isModalVisible == true ? false : true;
     },
-    imageDefault(e) {
-      e.target.src = DEFAULT_IMAGE_EXERCICE;
-    },
+    // imageDefault(e) {
+    //   e.target.src = DEFAULT_IMAGE_EXERCICE;
+    // },
   },
 };
 </script>

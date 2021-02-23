@@ -114,7 +114,7 @@ export default {
     ...mapGetters(["currentUser", "isAuthenticated", "errors"]),
     bgImage() {
       return {
-        backgroundImage: `url${require('../assets/gym_wallpaper.jpg')}`
+        backgroundImage: `url${require('../../assets/gym_wallpaper.jpg')}`
       };
   }
   },

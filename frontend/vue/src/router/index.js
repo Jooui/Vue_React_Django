@@ -1,16 +1,27 @@
 import { createWebHistory, createRouter } from "vue-router";
-import Home from "@/views/Home.vue";
-import Login from "@/views/Login.vue";
-import Register from "@/views/Register.vue";
-import About from "@/views/About.vue";
-import Profile from "@/views/Profile.vue";
-import ExerciceUpload from "@/views/ExerciceUpload.vue";
-import Trainings from "@/views/Trainings.vue";
-import TrainingsDetails from "@/views/TrainingsDetails.vue";
-
-
+// import { defineAsyncComponent } from 'vue';
+import Home from "@/views/home/Home.vue";
+import Login from "@/views/login/Login.vue";
+import Register from "@/views/login/Register.vue";
+import About from "@/views/about/About.vue";
+import Profile from "@/views/profile/Profile.vue";
+import ExerciceUpload from "@/views/exercices/ExerciceUpload.vue";
+import Trainings from "@/views/trainings/Trainings.vue";
+import TrainingsDetails from "@/views/trainings/TrainingsDetails.vue";
+import TrainingUpload from "@/views/trainings/TrainingUpload.vue";
 
 import NotFound from "@/views/NotFound.vue";
+
+// const Home = defineAsyncComponent(() => import("@/views/Home.vue"));
+// const Login = defineAsyncComponent(() => import("@/views/Login.vue"));
+// const Register = defineAsyncComponent(() => import("@/views/Register.vue"));
+// const About = defineAsyncComponent(() => import("@/views/About.vue"));
+// const Profile = defineAsyncComponent(() => import("@/views/Profile.vue"));
+// const ExerciceUpload = defineAsyncComponent(() => import("@/views/ExerciceUpload.vue"));
+// const TrainingsDetails = defineAsyncComponent(() => import("@/views/TrainingsDetails.vue"));
+// const Trainings = defineAsyncComponent(() => import("@/views/Trainings.vue"));
+// const NotFound = defineAsyncComponent(() => import("@/views/NotFound.vue"));
+
 import authGuard from "@/common/AuthGuard";
 
 const routes = [
@@ -67,6 +78,12 @@ const routes = [
     path: "/trainings/:training",
     name: "TrainingDetails",
     component: TrainingsDetails,
+  },
+  {
+    path: "/trainings/upload",
+    name: "TrainingUpload",
+    component: TrainingUpload,
+    beforeEnter: authGuard,
   },
 ];
 

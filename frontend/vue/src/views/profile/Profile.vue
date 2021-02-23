@@ -70,6 +70,7 @@
               <div class="profile-name">{{ profile.username }}</div>
             </div>
             <div class="menu-items">
+              
               <a
                 class="profile-menu-link"
                 :class="[currentTab == 'main' ? 'active' : '']"
@@ -102,12 +103,18 @@
             </div>
           </div>
         </div>
-        <div v-if="currentTab == 'exercices'">
-          <exercices-list :author="profile.username" :items-per-page="5" />
-        </div>
-        <div v-if="currentTab == 'update'">
-          <UpdateProfile />
-        </div>
+        <keep-alive>
+          <div v-if="currentTab == 'exercices'">
+            <!-- <exercices-list :author="profile.username" :items-per-page="5" /> -->
+            <AsyncListExercices :author="profile.username" :items-per-page="5"/>
+          </div>
+        </keep-alive>
+        <keep-alive>
+          <div v-if="currentTab == 'update'">
+            <UpdateProfile />
+          </div>
+        </keep-alive>
+        
         <div class="load-more" @click="logout" v-if="owner">LOGOUT</div>
       </div>
     </div>
@@ -116,9 +123,12 @@
 <script>
 import store from "@/store";
 import { mapGetters } from "vuex";
-import exercicesList from "@/components/exercices/exercices_list";
+import { defineAsyncComponent } from 'vue';
+// import exercicesList from "@/components/exercices/exercices_list";
 import UpdateProfile from "@/components/profile/updateProfile";
 import { IMAGEN_PROFILE } from "@/store/defaults.type";
+
+const AsyncListExercices = defineAsyncComponent(() => import('@/components/exercices/exercices_list'))
 
 export default {
   name: "Profile",
@@ -129,7 +139,8 @@ export default {
     };
   },
   components: {
-    exercicesList,
+    AsyncListExercices,
+    // exercicesList,
     UpdateProfile,
   },
   methods: {

@@ -5,7 +5,6 @@ const initialState = {
     name: "",
     description: "",
     image: "",
-    categories: [],
     verified: false,
     difficulties:[]
   },
@@ -39,6 +38,7 @@ export const actions = {
   },
   training_publish({ state }) {
     console.log(state.training);
+    JSON.stringify(this.training)
     return TrainingsService.create(state.training);
   },
   training_delete(context, slug) {

@@ -8,7 +8,7 @@
       <exerciceDetails :state="isModalVisible" :exercice="exercice" />
     </transition>-->
     <exerciceDetails :state="isModalVisible" :exercice="exercice" /> 
-
+    <!-- <AsyncExerciceDetails/> -->
     <div class="video" @click="showModal">
       <!-- <div class="video-time">15.13</div> -->
 
@@ -18,6 +18,7 @@
         alt="exer imagen"
         @error="imageDefault"
       />
+      <!-- <AyncImage :src="exercice.image" @error="imageDefault"/> -->
 
       <!-- </div> -->
       <div class="exercice_text">
@@ -36,9 +37,29 @@
 
 <script>
 import { mapGetters } from "vuex";
+// import { defineAsyncComponent } from 'vue';
 import flexiones from "@/assets/img/exercices/flexiones.jpg";
 import exerciceDetails from "@/components/exercices/exercice_details";
 import { DEFAULT_IMAGE_EXERCICE } from "@/store/defaults.type";
+// const AsyncExerciceDetails = defineAsyncComponent(() => import('@/components/exercices/exercice_details'))
+// console.log(AsyncExerciceDetails);
+// const AyncImage = defineAsyncComponent(
+//   () =>
+//     new Promise((resolve) => {
+//       resolve({
+//         template: `
+//           <img
+//             class="exercice_img"
+//             alt="exer imagen"
+//           />`
+//       });
+//     })
+// );
+// const AsyncExerciceDetails = defineAsyncComponent({
+//   loader: () => import('@/components/exercices/exercice_details'),
+//   // state="isModalVisible",
+//   // exercice="exercice"
+// })
 
 export default {
   name: "exercice",
@@ -61,6 +82,8 @@ export default {
   //   },
   // },
   components: {
+    // AsyncExerciceDetails,
+    // AyncImage,
     exerciceDetails,
   },
   data() {
