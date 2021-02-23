@@ -29,11 +29,12 @@ export const actions = {
       });
   },
   async fetch_training(context, trainingSlug, prevTraining) {
+    console.log(trainingSlug);
     if (prevTraining !== undefined) {
-      return context.commit("set_exercice", prevTraining);
+      return context.commit("set_training", prevTraining);
     }
     const { data } = await TrainingsService.get(trainingSlug);
-    context.commit("set_training", data.training);
+    context.commit("set_training", data);
     return data;
   },
   training_publish({ state }) {

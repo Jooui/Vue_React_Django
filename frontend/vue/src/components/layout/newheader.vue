@@ -30,7 +30,11 @@
                 >
               </li>
               <li class="separator"></li>
-              <li><a href="#">Popular Trainings</a></li>
+              <li>
+                <router-link :to="{ name: 'Trainings' }"
+                  ><a href="#">Popular Trainings</a></router-link
+                >
+              </li>
               <li class="separator"></li>
               <li><a href="#">Latest Trainings</a></li>
               <li class="separator"></li>
@@ -52,7 +56,9 @@
                 >
               </li>
               <li class="separator"></li>
-              <li><a href="#">Popular Exercices</a></li>
+              <li>
+                <a href="#">Popular Exercices</a>
+              </li>
               <li class="separator"></li>
               <li><a href="#">Latest Exercices</a></li>
               <li class="separator"></li>

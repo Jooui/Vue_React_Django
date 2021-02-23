@@ -6,6 +6,8 @@ import About from "@/views/About.vue";
 import Profile from "@/views/Profile.vue";
 import ExerciceUpload from "@/views/ExerciceUpload.vue";
 import Trainings from "@/views/Trainings.vue";
+import TrainingsDetails from "@/views/TrainingsDetails.vue";
+
 
 
 import NotFound from "@/views/NotFound.vue";
@@ -60,6 +62,11 @@ const routes = [
     path: "/trainings",
     name: "Trainings",
     component: Trainings,
+  },
+  {
+    path: "/trainings/:training",
+    name: "TrainingDetails",
+    component: TrainingsDetails,
   },
 ];
 

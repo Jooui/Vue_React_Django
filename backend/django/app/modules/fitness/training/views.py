@@ -15,6 +15,7 @@ from rest_framework.permissions import (AllowAny, IsAuthenticated, IsAuthenticat
 class TrainingViewSet(viewsets.ModelViewSet):
     queryset = Training.objects.all().order_by('name')
     serializer_class = TrainingSerializer
+    lookup_field = 'slug'
 
     def create(self, request):
         serializer_context = {

@@ -1,20 +1,23 @@
 <template>
-  <div>
-    {{trainings}}
-    peliles
+  <div class="trainings-list-canvas">
+    <TrainingPreview
+      v-for="(training, index) in trainings"
+      v-bind:key="index"
+      :training="training"
+    />
     <VPagination :pages="pages" :currentPage="currentPage" />
     </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-// import exercice from "./exercice";
+import TrainingPreview from "./TrainingPreview";
 import VPagination from "../layout/VPagination";
-// import  fetch_exercice  from "../../store/exercices.module";
+
 export default {
   name: "TrainingsList",
   components: {
-    // exercice,
+    TrainingPreview,
     VPagination,
   },
   props: {
@@ -99,8 +102,11 @@ export default {
 </script>
 
 <style>
-/* .videos {
-  margin: 30px auto auto auto;
-  max-width: 1200px;
-} */
+  .trainings-list-canvas{
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    width: 100%;
+  }
+
 </style>
