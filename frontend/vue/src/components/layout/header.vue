@@ -32,7 +32,7 @@
               <li class="separator"></li>
               <li>
                 <router-link :to="{ name: 'Trainings' }"
-                  ><a href="#">Popular Trainings</a></router-link
+                  >Popular Trainings</router-link
                 >
               </li>
               <li class="separator"></li>

@@ -39,5 +39,20 @@ services:
     networks:
       - app_network
 
+  # pgadmin:
+  #   image: dpage/pgadmin4
+  #   container_name: "Pgadmin_container"
+  #   # environment:
+  #   #   PGADMIN_DEFAULT_EMAIL: "revand@gmail.com"
+  #   #   PGADMIN_DEFAULT_PASSWORD: ""
+  #   ports:
+  #     - 6969:80
+  #   depends_on:
+  #     - postgres
+  #   networks:
+  #     - app_network
+  #   logging:
+  #     driver: none
+
 networks:
   app_network:

@@ -53,7 +53,7 @@ export default {
   },
   data() {
     console.log(this.training);
-    console.log(this.training.image != "" ? this.training.image : this.training.difficulties[0])
+    // console.log(this.training.image != "" ? this.training.image : this.training.difficulties[0])
     return {
       isModalVisible: false,
     };
